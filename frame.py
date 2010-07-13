@@ -7,7 +7,7 @@ from line import *
 def create(parent):
     return Frame(parent)
 
-[wxID_FRAMEFILEOPEN, wxID_FRAMEFILEQUIT, wxID_FRAMEFILESAVE, 
+[wxID_FRAMEFILEOPEN, wxID_FRAMEFILEQUIT, wxID_FRAMEFILESAVE,
 ] = [wx.NewId() for _init_coll_File_Items in range(3)]
 
 [wxID_FRAMEMENUFILECLOSE, wxID_FRAMEMENUFILEOPEN, wxID_FRAMEMENUFILEQUIT, 
@@ -90,7 +90,7 @@ class Frame(wx.Frame):
               parent=self.scrolledWindow, pos=wx.Point(230, 8),
               size=wx.Size(800, 20), style=wx.ALIGN_CENTRE)
 
-        self.line = Line(self, entry.Entry(u'25/11/2010', 
+        self.line = Line(self, entry.Entry(u'25/11/2010',
                                            u'CB Aur\xe9lie',
                                            u'Chronodrive.com',
                                            u'-83.56'))
