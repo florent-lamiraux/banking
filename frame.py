@@ -90,7 +90,10 @@ class Frame(wx.Frame):
               parent=self.scrolledWindow, pos=wx.Point(230, 8),
               size=wx.Size(800, 20), style=wx.ALIGN_CENTRE)
 
-        self.line = Line()
+        self.line = Line(self, entry.Entry(u'25/11/2010', 
+                                           u'CB Aur\xe9lie',
+                                           u'Chronodrive.com',
+                                           u'-83.56'))
 
         self.totalBanqueStaticText = wx.StaticText(id=wxID_FRAMETOTALBANQUESTATICTEXT,
               label=u'Total banque', name=u'totalBanqueStaticText',
