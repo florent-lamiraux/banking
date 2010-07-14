@@ -57,7 +57,7 @@ class Account (object) :
         """
         Write data in a file
         """
-        with open("filename", "w") as f :
+        with open(filename, "w") as f :
             f.write(str(self))
 
     def sort (self) :
