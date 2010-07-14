@@ -36,6 +36,7 @@ class Account (object) :
         Read data in a file
         """
         self.entries = []
+        ln = 0
         with open(filename, "r") as f :
             line = f.readline()
             ln += 1
