@@ -5,8 +5,7 @@ from entry import *
 
 class Account (object) :
 
-    def __init__(self, initialAmount = 0):
-        self.initialAmount = initialAmount
+    def __init__(self):
         self.entries = []
 
     def add_entry(self, date, mode, label, amount):
@@ -20,7 +19,7 @@ class Account (object) :
         """
         return reduce (lambda x,y: x+y,
                        map(lambda e : e.amount, self.entries),
-                       self.initialAmount)
+                       0)
 
     @property
     def bank_balance(self) :
@@ -30,24 +29,14 @@ class Account (object) :
         return reduce (lambda x,y: x+y,
                        map(lambda e : e.amount,
                            filter(lambda e:e.bank, self.entries)),
-                       self.initialAmount)
+                       0)
 
     def read(self, filename) :
         """
         Read data in a file
         """
-        self.initialAmount = 0
         self.entries = []
         with open(filename, "r") as f :
-            # First line
-            ln = 1
-            line = f.readline()
-            splittedLine = re.split("[\t]", line)
-            if splittedLine[3] != "Initial amount" :
-                print splittedLine
-                raise RuntimeError("Error line %i of file %s"%(ln, filename))
-            self.initialAmount = decimal.Decimal(splittedLine[4])
-            ln += 1
             line = f.readline()
             ln += 1
             while line != "\n" :
@@ -78,7 +67,7 @@ class Account (object) :
 
     def __str__(self) :
         self.entries.sort()
-        output = 3*"\t"+ "Initial amount\t" +  str(self.initialAmount)+"\n"
+        output = ""
         for e in self.entries :
             output += e.__str__() +"\n"
         
@@ -89,13 +78,15 @@ class Account (object) :
 
 if __name__ == "__main__":
 
-    a = account(5000)
+    a = Account()
+    a.add_entry("01/07/2010", "Sans objet", "Montant initial", "5000")
     a.add_entry("09/07/2010", "CB Florent", "Chronodrive.com", "-83.12")
     a.add_entry("10/07/2010", "CB Aurélie",
                 "Crédit Lyonnais Toulouse Montplaisir", "-500")
     a.add_entry("09/07/2010", "CB Aurélie", "Crédit Agricole Toulouse Rangueil",
                 "-500")
+    a.entries[0].bank = True
     a.entries[1].bank = True
 
-    with open("comptes", "w") as f:
+    with open("test-comptes.cpt", "w") as f:
         f.write (a.__str__())
