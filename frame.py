@@ -19,13 +19,11 @@ def create(parent):
 [wxID_FRAMEFILEOPEN, wxID_FRAMEFILEQUIT, wxID_FRAMEFILESAVE, 
 ] = [wx.NewId() for _init_coll_File_Items in range(3)]
 
-[wxID_FRAMEMENUFILEOPEN, wxID_FRAMEMENUFILEQUIT, wxID_FRAMEMENUFILESAVE, 
-] = [wx.NewId() for _init_coll_menuFile_Items in range(3)]
+[wxID_FRAMEMENUFILECLOSE, wxID_FRAMEMENUFILEOPEN, wxID_FRAMEMENUFILEQUIT, 
+ wxID_FRAMEMENUFILESAVE, wxID_FRAMEMENUFILESAVEAS, 
+] = [wx.NewId() for _init_coll_menuFile_Items in range(5)]
 
 class Frame(wx.Frame):
-    def _init_my_code(self, parent):
-        self.account = account.Account()
-    
     def _init_coll_menuBar1_Menus(self, parent):
         # generated method, don't edit
 
@@ -39,12 +37,20 @@ class Frame(wx.Frame):
         parent.Append(help=u'Enregistrer les ecritures dans un fichier',
               id=wxID_FRAMEMENUFILESAVE, kind=wx.ITEM_NORMAL,
               text=u'Enregistrer')
+        parent.Append(help='', id=wxID_FRAMEMENUFILESAVEAS, kind=wx.ITEM_NORMAL,
+              text=u'Enregistrer sous')
+        parent.Append(help='', id=wxID_FRAMEMENUFILECLOSE, kind=wx.ITEM_NORMAL,
+              text=u'Fermer')
         parent.Append(help=u"Quitter l'application", id=wxID_FRAMEMENUFILEQUIT,
               kind=wx.ITEM_NORMAL, text=u'Quitter')
         self.Bind(wx.EVT_MENU, self.OnFileOpenMenu, id=wxID_FRAMEMENUFILEOPEN)
         self.Bind(wx.EVT_MENU, self.OnFileSaveMenu, id=wxID_FRAMEMENUFILESAVE)
         self.Bind(wx.EVT_MENU, self.OnFileQuitMenu, id=wxID_FRAMEMENUFILEQUIT)
-
+        self.Bind(wx.EVT_MENU, self.OnMenuFileSaveasMenu,
+              id=wxID_FRAMEMENUFILESAVEAS)
+        self.Bind(wx.EVT_MENU, self.OnMenuFileCloseMenu,
+              id=wxID_FRAMEMENUFILECLOSE)
+        
     def _init_utils(self):
         # generated method, don't edit
         self.menuFile = wx.Menu(title=u'Fichier')
@@ -143,25 +149,50 @@ class Frame(wx.Frame):
               value=u'982.14')
 
     def __init__(self, parent):
-        self._init_my_code(parent)
         self._init_ctrls(parent)
-
+        # My code
+        self.account = account.Account()
+        self.filename = None
+    
     def OnFileItems0Menu(self, event):
         event.Skip()
 
     def OnFileOpenMenu(self, event):
-        dlg = wx.FileDialog(self, 'Choose a file', '.', '', '*.cpt', wx.OPEN)
+        dlg = wx.FileDialog(self, 'Choisissez un fichier', '.', '', '*.cpt', wx.OPEN)
         try:
             if dlg.ShowModal() == wx.ID_OK:
                 filename = dlg.GetPath()
                 # Your code
                 self.account.read(filename)
+                self.filename = filename
+                self.SetTitle(("Fichier %s") % filename)
         finally:
             dlg.Destroy()
         event.Skip()
 
     def OnFileSaveMenu(self, event):
-        event.Skip()
-
+        if self.filename == None:
+            return self.OnFileSaveAsMenu(envent)
+        else:
+            self.account.save(filename)
+    
     def OnFileQuitMenu(self, event):
+        self.close()
+
+    def OnMenuFileSaveasMenu(self, event):
+        dlg = wx.FileDialog(self, 'Enregistrer sous', '.', '', '*.*', wx.SAVE)
+        try:
+            if dlg.ShowModal() == wx.ID_OK:
+                filename = dlg.GetPath()
+                # Your code
+                self.account.save(filename)
+                self.filename = filename
+                self.SetTitle(("Fichier %s") % filename)
+        finally:
+            dlg.Destroy()
+
+    def OnMenuFileCloseMenu(self, event):
+        self.account = Account.account()
+        self.filename = None
+        self.SetTitle(("Pas de fichier"))
         event.Skip()
