@@ -63,6 +63,13 @@ class Account (object) :
                 line = f.readline()
                 ln += 1
 
+    def save(self, filename) :
+        """
+        Write data in a file
+        """
+        with open("filename", "w") as f :
+            f.write(self.__str__())
+
     def sort (self) :
         """
         Sort entries by increasing dates
