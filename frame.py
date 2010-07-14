@@ -94,26 +94,7 @@ class Frame(wx.Frame):
                                            u'CB Aur\xe9lie',
                                            u'Chronodrive.com',
                                            u'-83.56'))
-
-        self.totalBanqueStaticText = wx.StaticText(id=wxID_FRAMETOTALBANQUESTATICTEXT,
-              label=u'Total banque', name=u'totalBanqueStaticText',
-              parent=self.scrolledWindow, pos=wx.Point(900, 82),
-              size=wx.Size(129, 19), style=0)
-
-        self.totalStaticText = wx.StaticText(id=wxID_FRAMETOTALSTATICTEXT,
-              label=u'Total', name=u'totalStaticText',
-              parent=self.scrolledWindow, pos=wx.Point(900, 62),
-              size=wx.Size(129, 20), style=0)
-
-        self.totalTextCtrl = wx.TextCtrl(id=wxID_FRAMETOTALTEXTCTRL,
-              name=u'totalTextCtrl', parent=self.scrolledWindow,
-              pos=wx.Point(1100, 62), size=wx.Size(149, 19), style=wx.TE_RIGHT,
-              value=u'1000.05')
-
-        self.totalBankTextCtrl = wx.TextCtrl(id=wxID_FRAMETOTALBANKTEXTCTRL,
-              name=u'totalBankTextCtrl', parent=self.scrolledWindow,
-              pos=wx.Point(1100, 82), size=wx.Size(149, 19), style=wx.TE_RIGHT,
-              value=u'982.14')
+        self.lastLine = LastLine(self)
 
     def __init__(self, parent):
         self._init_ctrls(parent)
