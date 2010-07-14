@@ -177,7 +177,7 @@ class Frame(wx.Frame):
             self.account.save(filename)
     
     def OnFileQuitMenu(self, event):
-        self.close()
+        self.Close()
 
     def OnMenuFileSaveasMenu(self, event):
         dlg = wx.FileDialog(self, 'Enregistrer sous', '.', '', '*.*', wx.SAVE)
@@ -192,7 +192,7 @@ class Frame(wx.Frame):
             dlg.Destroy()
 
     def OnMenuFileCloseMenu(self, event):
-        self.account = Account.account()
+        self.account = account.Account()
         self.filename = None
         self.SetTitle(("Pas de fichier"))
         event.Skip()
