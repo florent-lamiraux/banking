@@ -1,6 +1,7 @@
 #Boa:Frame:Frame
 
 import wx
+import account
 
 def create(parent):
     return Frame(parent)
@@ -22,6 +23,9 @@ def create(parent):
 ] = [wx.NewId() for _init_coll_menuFile_Items in range(3)]
 
 class Frame(wx.Frame):
+    def _init_my_code(self, parent):
+        self.account = account.Account()
+    
     def _init_coll_menuBar1_Menus(self, parent):
         # generated method, don't edit
 
@@ -139,12 +143,21 @@ class Frame(wx.Frame):
               value=u'982.14')
 
     def __init__(self, parent):
+        self._init_my_code(parent)
         self._init_ctrls(parent)
 
     def OnFileItems0Menu(self, event):
         event.Skip()
 
     def OnFileOpenMenu(self, event):
+        dlg = wx.FileDialog(self, 'Choose a file', '.', '', '*.cpt', wx.OPEN)
+        try:
+            if dlg.ShowModal() == wx.ID_OK:
+                filename = dlg.GetPath()
+                # Your code
+                self.account.read(filename)
+        finally:
+            dlg.Destroy()
         event.Skip()
 
     def OnFileSaveMenu(self, event):
