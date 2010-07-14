@@ -138,7 +138,10 @@ class Line (object) :
         event.Skip()
 
 class LastLine (object) :
-    def __init__(self, prnt, offset = 0):
+    """
+    Last line of the book with balance and bank balance
+    """
+    def __init__(self, prnt, total, totalBank, offset = 0):
         self.totalBanqueStaticText = wx.StaticText(id=wxID_FRAMETOTALBANQUESTATICTEXT,
               label=u'Total banque', name=u'totalBanqueStaticText',
               parent=prnt.scrolledWindow, pos=wx.Point(900, 82+offset),
@@ -152,9 +155,19 @@ class LastLine (object) :
         self.totalTextCtrl = wx.TextCtrl(id=wxID_FRAMETOTALTEXTCTRL,
               name=u'totalTextCtrl', parent=prnt.scrolledWindow,
               pos=wx.Point(1100, 62+offset), size=wx.Size(149, 19), style=wx.TE_RIGHT,
-              value=u'1000.05')
+              value=total.__str__())
 
         self.totalBankTextCtrl = wx.TextCtrl(id=wxID_FRAMETOTALBANKTEXTCTRL,
               name=u'totalBankTextCtrl', parent=prnt.scrolledWindow,
               pos=wx.Point(1100, 82+offset), size=wx.Size(149, 19), style=wx.TE_RIGHT,
-              value=u'982.14')
+              value=totalBank.__str__())
+
+    def Destroy(self):
+        self.totalBanqueStaticText.Destroy()
+        self.totalBanqueStaticText = None
+        self.totalStaticText.Destroy()
+        self.totalStaticText = None
+        self.totalTextCtrl.Destroy()
+        self.totalTextCtrl = None
+        self.totalBankTextCtrl.Destroy()
+        self.totalBankTextCtrl = None

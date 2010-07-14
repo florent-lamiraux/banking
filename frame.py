@@ -10,8 +10,8 @@ def create(parent):
 [wxID_FRAMEFILEOPEN, wxID_FRAMEFILEQUIT, wxID_FRAMEFILESAVE,
 ] = [wx.NewId() for _init_coll_File_Items in range(3)]
 
-[wxID_FRAMEMENUFILECLOSE, wxID_FRAMEMENUFILEOPEN, wxID_FRAMEMENUFILEQUIT, 
- wxID_FRAMEMENUFILESAVE, wxID_FRAMEMENUFILESAVEAS, 
+[wxID_FRAMEMENUFILECLOSE, wxID_FRAMEMENUFILEOPEN, wxID_FRAMEMENUFILEQUIT,
+ wxID_FRAMEMENUFILESAVE, wxID_FRAMEMENUFILESAVEAS,
 ] = [wx.NewId() for _init_coll_menuFile_Items in range(5)]
 
 class Frame(wx.Frame):
@@ -90,18 +90,14 @@ class Frame(wx.Frame):
               parent=self.scrolledWindow, pos=wx.Point(230, 8),
               size=wx.Size(800, 20), style=wx.ALIGN_CENTRE)
 
-        self.line = Line(self, entry.Entry(u'25/11/2010',
-                                           u'CB Aur\xe9lie',
-                                           u'Chronodrive.com',
-                                           u'-83.56'))
-        self.lastLine = LastLine(self)
-
     def __init__(self, parent):
         self._init_ctrls(parent)
         # My code
         self.account = account.Account()
         self.filename = None
-    
+        self.lastLine = None
+        self.writeLines()
+
     def OnFileItems0Menu(self, event):
         event.Skip()
 
@@ -114,6 +110,7 @@ class Frame(wx.Frame):
                 self.account.read(filename)
                 self.filename = filename
                 self.SetTitle(("Fichier %s") % filename)
+                self.writeLines()
         finally:
             dlg.Destroy()
         event.Skip()
@@ -123,7 +120,7 @@ class Frame(wx.Frame):
             return self.OnFileSaveAsMenu(envent)
         else:
             self.account.save(filename)
-    
+
     def OnFileQuitMenu(self, event):
         self.Close()
 
@@ -145,3 +142,18 @@ class Frame(wx.Frame):
         self.SetTitle(("Pas de fichier"))
         event.Skip()
 
+    def writeLines(self):
+        a = self.account
+        self.lines = []
+        offset = 0
+        for e in a.entries :
+            self.lines.append(Line(self, e, offset))
+            offset += 20
+
+        if self.lastLine :
+            self.lastLine.Destroy()
+
+        self.lastLine = LastLine(self, total = a.balance,
+                                 totalBank = a.bank_balance,
+                                 offset = offset)
+        self.Refresh()
