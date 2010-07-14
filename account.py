@@ -57,7 +57,7 @@ class Account (object) :
         Write data in a file
         """
         with open("filename", "w") as f :
-            f.write(self.__str__())
+            f.write(str(self))
 
     def sort (self) :
         """
@@ -69,7 +69,7 @@ class Account (object) :
         self.entries.sort()
         output = ""
         for e in self.entries :
-            output += e.__str__() +"\n"
+            output += str(e) +"\n"
         
         output += "\n"
         output += 3*"\t"+"balance: "+str(self.balance)
@@ -89,4 +89,4 @@ if __name__ == "__main__":
     a.entries[1].bank = True
 
     with open("test-comptes.cpt", "w") as f:
-        f.write (a.__str__())
+        f.write (str(a))

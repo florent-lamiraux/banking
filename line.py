@@ -18,7 +18,7 @@ class Line (object) :
     def __init__(self, par, entry, offset = 0) :
         self.dateTextCtrl1 = wx.TextCtrl(id=wxID_FRAMEDATETEXTCTRL1,
               name=u'dateTextCtrl1', parent=par.scrolledWindow, pos=wx.Point(0,
-              32+offset), size=wx.Size(99, 19), style=0, value=entry.date.__str__())
+              32+offset), size=wx.Size(99, 19), style=0, value=str(entry.date))
         self.dateTextCtrl1.Bind(wx.EVT_TEXT_MAXLEN,
               self.OnDateTextCtrl1TextMaxlen, id=wxID_FRAMEDATETEXTCTRL1)
         self.dateTextCtrl1.Bind(wx.EVT_TEXT_URL, self.OnDateTextCtrl1TextUrl,
@@ -67,7 +67,7 @@ class Line (object) :
         self.montantTextCtrl1 = wx.TextCtrl(id=wxID_FRAMEMONTANTTEXTCTRL1,
               name=u'montantTextCtrl1', parent=par.scrolledWindow,
               pos=wx.Point(1100, 32+offset), size=wx.Size(149, 19), style=wx.TE_RIGHT,
-              value=entry.amount.__str__())
+              value=str(entry.amount))
 
         self.montantTextCtrl1.Bind(wx.EVT_TEXT_MAXLEN,
               self.OnMontantTextCtrl1TextMaxlen, id=wxID_FRAMEMONTANTTEXTCTRL1)
@@ -155,12 +155,12 @@ class LastLine (object) :
         self.totalTextCtrl = wx.TextCtrl(id=wxID_FRAMETOTALTEXTCTRL,
               name=u'totalTextCtrl', parent=prnt.scrolledWindow,
               pos=wx.Point(1100, 62+offset), size=wx.Size(149, 19), style=wx.TE_RIGHT,
-              value=total.__str__())
+              value=str(total))
 
         self.totalBankTextCtrl = wx.TextCtrl(id=wxID_FRAMETOTALBANKTEXTCTRL,
               name=u'totalBankTextCtrl', parent=prnt.scrolledWindow,
               pos=wx.Point(1100, 82+offset), size=wx.Size(149, 19), style=wx.TE_RIGHT,
-              value=totalBank.__str__())
+              value=str(totalBank))
 
     def Destroy(self):
         self.totalBanqueStaticText.Destroy()
