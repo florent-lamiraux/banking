@@ -42,13 +42,17 @@ class Account (object) :
             ln += 1
             while line != "\n" :
                 splittedLine = re.split("[\t]", line)
-                if len(splittedLine) is not 4:
+                if len(splittedLine) != 5:
                     raise RuntimeError ("line %i is invalid."%ln)
                 date = splittedLine[0]
                 mode = splittedLine[1]
                 label = splittedLine[2]
                 amount = splittedLine[3]
+                bank = splittedLine[4]
+                print bank
                 e = Entry(date, mode, label, amount)
+                if bank == "True\n" :
+                    e.bank = True
                 self.entries.append(e)
                 line = f.readline()
                 ln += 1
