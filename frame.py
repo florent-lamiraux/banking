@@ -95,7 +95,9 @@ class Frame(wx.Frame):
         # My code
         self.account = account.Account()
         self.filename = None
+        self.lines = []
         self.lastLine = None
+        self.addLine = None
         self.writeLines()
 
     def OnFileItems0Menu(self, event):
@@ -117,9 +119,9 @@ class Frame(wx.Frame):
 
     def OnFileSaveMenu(self, event):
         if self.filename == None:
-            return self.OnFileSaveAsMenu(envent)
+            return self.OnFileSaveAsMenu(event)
         else:
-            self.account.save(filename)
+            self.account.save(self.filename)
 
     def OnFileQuitMenu(self, event):
         self.Close()
