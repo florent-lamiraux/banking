@@ -14,7 +14,8 @@ def create(parent):
  wxID_FRAMEMENUFILESAVE, wxID_FRAMEMENUFILESAVEAS,
 ] = [wx.NewId() for _init_coll_menuFile_Items in range(5)]
 
-[wxID_FRAMEADD] = [wx.NewId() for _init_coll_buttons in range(1)]
+[wxID_FRAMEADD, wxID_FRAMEDELETE] = [wx.NewId() for _init_coll_buttons in
+                                     range(2)]
 
 class Frame(wx.Frame):
     def _init_coll_menuBar1_Menus(self, parent):
@@ -101,6 +102,7 @@ class Frame(wx.Frame):
         self.lastLine = None
         self.addLine = None
         self.addButton = None
+        self.deleteButton = None
         self.writeLines()
 
     def OnFileItems0Menu(self, event):
@@ -157,6 +159,19 @@ class Frame(wx.Frame):
         self.addLine.entry = None
         self.writeLines()
 
+    def OnDeleteButton(self, event):
+        """
+        Call back for delete button: remove selected lines
+        """
+        a = self.account
+        deleteLines = []
+        for l in self.lines :
+            if l.selectCheckBox1.GetValue() :
+                deleteLines.append(l)
+
+        for l in deleteLines :
+            a.entries.remove(l.entry)
+        self.writeLines()
 
     def writeLines(self):
         # Destroy existing lines
@@ -195,5 +210,16 @@ class Frame(wx.Frame):
                                    pos=wx.Point(0, 150 + offset),
               size=wx.Size(85, 29), style=0)
         self.addButton.Bind(wx.EVT_BUTTON, self.OnAddButton, id=wxID_FRAMEADD)
+
+        # Delete button
+        if self.deleteButton :
+            self.deleteButton.Destroy()
+
+        self.deleteButton = wx.Button(id=wxID_FRAMEDELETE, label=u'Supprimer',
+                                   name=u'delete', parent=self.scrolledWindow,
+                                   pos=wx.Point(100, 150 + offset),
+              size=wx.Size(85, 29), style=0)
+        self.deleteButton.Bind(wx.EVT_BUTTON, self.OnDeleteButton,
+                               id=wxID_FRAMEDELETE)
 
         self.Refresh()
