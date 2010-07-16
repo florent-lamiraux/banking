@@ -145,17 +145,26 @@ class Frame(wx.Frame):
         event.Skip()
 
     def writeLines(self):
-        a = self.account
+        # Destroy existing lines
+        for l in self.lines :
+            l.destroy()
         self.lines = []
+        a = self.account
+        a.sort()
         offset = 0
         for e in a.entries :
-            self.lines.append(Line(self, e, offset))
+            self.lines.append(LineSelect(self, e, offset))
             offset += 20
 
         if self.lastLine :
-            self.lastLine.Destroy()
+            self.lastLine.destroy()
 
         self.lastLine = LastLine(self, total = a.balance,
                                  totalBank = a.bank_balance,
                                  offset = offset)
+
+        if self.addLine :
+            self.addLine.destroy()
+        addEntry = entry.Entry(entry.dateToString(dt.date.today()), "", "", 0)
+        self.addLine = Line(self, addEntry, offset + 90)
         self.Refresh()

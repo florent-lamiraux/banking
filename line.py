@@ -1,4 +1,6 @@
 import wx
+import datetime as dt
+import decimal
 import entry
 
 [wxID_FRAME, wxID_FRAMEBANKCHECKBOX1, wxID_FRAMEBANKSTATICTEXT,
@@ -80,64 +82,85 @@ class Line (object) :
         self.montantTextCtrl1.Bind(wx.EVT_TEXT, self.OnMontantTextCtrl1Text,
               id=wxID_FRAMEMONTANTTEXTCTRL1)
 
+    def OnBankCheckBox1Checkbox(self, event):
+        self.entry.bank = self.bankCheckBox1.GetValue()
+
+    def OnBankCheckBox1Help(self, event):
+        print "OnBankCheckBox1Help"
+
+    def OnDateTextCtrl1TextMaxlen(self, event):
+        print "OnDateTextCtrl1TextMaxlen"
+
+    def OnDateTextCtrl1TextUrl(self, event):
+        print "OnDateTextCtrl1TextUrl"
+
+    def OnDateTextCtrl1TextEnter(self, event):
+        print "OnDateTextCtrl1TextEnter"
+
+    def OnDateTextCtrl1Text(self, event):
+        newDate = self.dateTextCtrl1.GetValue()
+        self.entry.date = entry.stringToDate(newDate)
+
+    def OnModeTextCtrl1TextMaxlen(self, event):
+        print "OnModeTextCtrl1TextMaxlen"
+
+    def OnModeTextCtrl1TextUrl(self, event):
+        print "OnModeTextCtrl1TextUrl"
+
+    def OnModeTextCtrl1TextEnter(self, event):
+        print "OnModeTextCtrl1TextEnter"
+
+    def OnModeTextCtrl1Text(self, event):
+        self.entry.mode = self.modeTextCtrl1.GetValue()
+
+    def OnLibelleTextCtrl1TextUrl(self, event):
+        print "OnLibelleTextCtrl1TextUrl"
+
+    def OnLibelleTextCtrl1TextMaxlen(self, event):
+        print "OnLibelleTextCtrl1TextMaxlen"
+
+    def OnLibelleTextCtrl1TextEnter(self, event):
+        print "OnLibelleTextCtrl1TextEnter"
+
+    def OnLibelleTextCtrl1Text(self, event):
+        self.entry.label = self.libelleTextCtrl1.GetValue()
+
+    def OnMontantTextCtrl1TextMaxlen(self, event):
+        print "OnMontantTextCtrl1TextMaxlen"
+
+    def OnMontantTextCtrl1TextUrl(self, event):
+        print "OnMontantTextCtrl1TextUrl"
+
+    def OnMontantTextCtrl1TextEnter(self, event):
+        print "OnMontantTextCtrl1TextEnter"
+
+    def OnMontantTextCtrl1Text(self, event):
+        self.entry.amount = decimal.Decimal(self.montantTextCtrl1.GetValue())
+
+    def destroy(self) :
+        self.dateTextCtrl1.Destroy()
+        self.dateTextCtrl1 = None
+        self.modeTextCtrl1.Destroy()
+        self.modeTextCtrl1 = None
+        self.libelleTextCtrl1.Destroy()
+        self.libelleTextCtrl1 = None
+        self.bankCheckBox1.Destroy()
+        self.bankCheckBox1 = None
+        self.montantTextCtrl1.Destroy()
+        self.montantTextCtrl1 = None
+
+class LineSelect (Line) :
+    def __init__(self, par, e, offset = 0) :
+        Line.__init__(self, par, e, offset)
         self.selectCheckBox1 = wx.CheckBox(id=wxID_FRAMESELECTCHECKBOX1,
               label=u'', name=u'selectCheckBox1', parent=par.scrolledWindow,
               pos=wx.Point(1264, 32+offset), size=wx.Size(19, 19), style=0)
         self.selectCheckBox1.SetValue(False)
 
-    def OnBankCheckBox1Checkbox(self, event):
-        event.Skip()
-
-    def OnBankCheckBox1Help(self, event):
-        event.Skip()
-
-    def OnDateTextCtrl1TextMaxlen(self, event):
-        event.Skip()
-
-    def OnDateTextCtrl1TextUrl(self, event):
-        event.Skip()
-
-    def OnDateTextCtrl1TextEnter(self, event):
-        event.Skip()
-
-    def OnDateTextCtrl1Text(self, event):
-        event.Skip()
-
-    def OnModeTextCtrl1TextMaxlen(self, event):
-        event.Skip()
-
-    def OnModeTextCtrl1TextUrl(self, event):
-        event.Skip()
-
-    def OnModeTextCtrl1TextEnter(self, event):
-        event.Skip()
-
-    def OnModeTextCtrl1Text(self, event):
-        event.Skip()
-
-    def OnLibelleTextCtrl1TextUrl(self, event):
-        event.Skip()
-
-    def OnLibelleTextCtrl1TextMaxlen(self, event):
-        event.Skip()
-
-    def OnLibelleTextCtrl1TextEnter(self, event):
-        event.Skip()
-
-    def OnLibelleTextCtrl1Text(self, event):
-        event.Skip()
-
-    def OnMontantTextCtrl1TextMaxlen(self, event):
-        event.Skip()
-
-    def OnMontantTextCtrl1TextUrl(self, event):
-        event.Skip()
-
-    def OnMontantTextCtrl1TextEnter(self, event):
-        event.Skip()
-
-    def OnMontantTextCtrl1Text(self, event):
-        event.Skip()
+    def destroy(self) :
+        self.selectCheckBox1.Destroy()
+        self.selectCheckBox1 = None
+        Line.destroy(self)
 
 class LastLine (object) :
     """
@@ -164,7 +187,7 @@ class LastLine (object) :
               pos=wx.Point(1100, 82+offset), size=wx.Size(149, 19), style=wx.TE_RIGHT,
               value=str(totalBank))
 
-    def Destroy(self):
+    def destroy(self):
         self.totalBanqueStaticText.Destroy()
         self.totalBanqueStaticText = None
         self.totalStaticText.Destroy()
