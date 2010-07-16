@@ -14,6 +14,8 @@ def create(parent):
  wxID_FRAMEMENUFILESAVE, wxID_FRAMEMENUFILESAVEAS,
 ] = [wx.NewId() for _init_coll_menuFile_Items in range(5)]
 
+[wxID_FRAMEADD] = [wx.NewId() for _init_coll_buttons in range(1)]
+
 class Frame(wx.Frame):
     def _init_coll_menuBar1_Menus(self, parent):
         # generated method, don't edit
@@ -98,6 +100,7 @@ class Frame(wx.Frame):
         self.lines = []
         self.lastLine = None
         self.addLine = None
+        self.addButton = None
         self.writeLines()
 
     def OnFileItems0Menu(self, event):
@@ -144,6 +147,17 @@ class Frame(wx.Frame):
         self.SetTitle(("Pas de fichier"))
         event.Skip()
 
+    def OnAddButton(self, event):
+        """
+        Call back to add a line in the book
+        """
+        a = self.account
+        newEntry = self.addLine.entry
+        a.entries.append(newEntry)
+        self.addLine.entry = None
+        self.writeLines()
+
+
     def writeLines(self):
         # Destroy existing lines
         for l in self.lines :
@@ -152,10 +166,13 @@ class Frame(wx.Frame):
         a = self.account
         a.sort()
         offset = 0
+
+        # Entry lines
         for e in a.entries :
             self.lines.append(LineSelect(self, e, offset))
             offset += 20
 
+        # Last line
         if self.lastLine :
             self.lastLine.destroy()
 
@@ -163,8 +180,20 @@ class Frame(wx.Frame):
                                  totalBank = a.bank_balance,
                                  offset = offset)
 
+        # Add line
         if self.addLine :
             self.addLine.destroy()
         addEntry = entry.Entry(entry.dateToString(dt.date.today()), "", "", 0)
         self.addLine = Line(self, addEntry, offset + 90)
+
+        # Add button
+        if self.addButton :
+            self.addButton.Destroy()
+
+        self.addButton = wx.Button(id=wxID_FRAMEADD, label=u'Ajouter',
+                                   name=u'add', parent=self.scrolledWindow,
+                                   pos=wx.Point(0, 150 + offset),
+              size=wx.Size(85, 29), style=0)
+        self.addButton.Bind(wx.EVT_BUTTON, self.OnAddButton, id=wxID_FRAMEADD)
+
         self.Refresh()
