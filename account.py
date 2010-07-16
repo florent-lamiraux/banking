@@ -49,7 +49,6 @@ class Account (object) :
                 label = splittedLine[2]
                 amount = splittedLine[3]
                 bank = splittedLine[4]
-                print bank
                 e = Entry(date, mode, label, amount)
                 if bank == "True\n" :
                     e.bank = True
