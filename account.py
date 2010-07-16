@@ -67,10 +67,9 @@ class Account (object) :
         """
         Sort entries by increasing dates
         """
-        self.entries.sort(self.entries, lambda x,y: cmp(x.date,y.date))
+        self.entries.sort(lambda x,y: cmp(x.date,y.date))
 
     def __str__(self) :
-        self.entries.sort()
         output = ""
         for e in self.entries :
             output += str(e) +"\n"
@@ -92,5 +91,6 @@ if __name__ == "__main__":
     a.entries[0].bank = True
     a.entries[1].bank = True
 
+    a.sort()
     with open("test-comptes.cpt", "w") as f:
         f.write (str(a))
