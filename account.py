@@ -73,7 +73,7 @@ class Account (object) :
         output = ""
         for e in self.entries :
             output += str(e) +"\n"
-        
+
         output += "\n"
         output += 3*"\t"+"balance: "+str(self.balance)
         output += "\t"+"bank: "+str(self.bank_balance)

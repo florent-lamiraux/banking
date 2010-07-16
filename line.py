@@ -15,10 +15,12 @@ class Line (object) :
     """
     One line in the account book
     """
-    def __init__(self, par, entry, offset = 0) :
+    def __init__(self, par, e, offset = 0) :
+        self.entry = e
+        self.frame = par
         self.dateTextCtrl1 = wx.TextCtrl(id=wxID_FRAMEDATETEXTCTRL1,
               name=u'dateTextCtrl1', parent=par.scrolledWindow, pos=wx.Point(0,
-              32+offset), size=wx.Size(99, 19), style=0, value=str(entry.date))
+              32+offset), size=wx.Size(99, 19), style=0, value=str(entry.dateToString(e.date)))
         self.dateTextCtrl1.Bind(wx.EVT_TEXT_MAXLEN,
               self.OnDateTextCtrl1TextMaxlen, id=wxID_FRAMEDATETEXTCTRL1)
         self.dateTextCtrl1.Bind(wx.EVT_TEXT_URL, self.OnDateTextCtrl1TextUrl,
@@ -31,7 +33,7 @@ class Line (object) :
         self.modeTextCtrl1 = wx.TextCtrl(id=wxID_FRAMEMODETEXTCTRL1,
               name=u'modeTextCtrl1', parent=par.scrolledWindow,
               pos=wx.Point(100, 32+offset), size=wx.Size(129, 19), style=0,
-              value=entry.mode)
+              value=e.mode)
 
         self.modeTextCtrl1.Bind(wx.EVT_TEXT_MAXLEN,
               self.OnModeTextCtrl1TextMaxlen, id=wxID_FRAMEMODETEXTCTRL1)
@@ -45,7 +47,7 @@ class Line (object) :
         self.libelleTextCtrl1 = wx.TextCtrl(id=wxID_FRAMELIBELLETEXTCTRL1,
               name=u'libelleTextCtrl1', parent=par.scrolledWindow,
               pos=wx.Point(230, 32+offset), size=wx.Size(799, 19), style=0,
-              value=entry.label)
+              value=e.label)
         self.libelleTextCtrl1.Bind(wx.EVT_TEXT_URL,
               self.OnLibelleTextCtrl1TextUrl, id=wxID_FRAMELIBELLETEXTCTRL1)
         self.libelleTextCtrl1.Bind(wx.EVT_TEXT_MAXLEN,
@@ -58,7 +60,7 @@ class Line (object) :
         self.bankCheckBox1 = wx.CheckBox(id=wxID_FRAMEBANKCHECKBOX1, label=u'',
               name=u'bankCheckBox1', parent=par.scrolledWindow,
               pos=wx.Point(1048, 32+offset), size=wx.Size(19, 19), style=0)
-        self.bankCheckBox1.SetValue(entry.bank)
+        self.bankCheckBox1.SetValue(e.bank)
         self.bankCheckBox1.Bind(wx.EVT_CHECKBOX, self.OnBankCheckBox1Checkbox,
               id=wxID_FRAMEBANKCHECKBOX1)
         self.bankCheckBox1.Bind(wx.EVT_HELP, self.OnBankCheckBox1Help,
@@ -67,7 +69,7 @@ class Line (object) :
         self.montantTextCtrl1 = wx.TextCtrl(id=wxID_FRAMEMONTANTTEXTCTRL1,
               name=u'montantTextCtrl1', parent=par.scrolledWindow,
               pos=wx.Point(1100, 32+offset), size=wx.Size(149, 19), style=wx.TE_RIGHT,
-              value=str(entry.amount))
+              value=str(e.amount))
 
         self.montantTextCtrl1.Bind(wx.EVT_TEXT_MAXLEN,
               self.OnMontantTextCtrl1TextMaxlen, id=wxID_FRAMEMONTANTTEXTCTRL1)
