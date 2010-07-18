@@ -3,19 +3,17 @@
 import wx
 import account
 from line import *
+yOffset = 20
 
 def create(parent):
     return Frame(parent)
-
-[wxID_FRAMEFILEOPEN, wxID_FRAMEFILEQUIT, wxID_FRAMEFILESAVE,
-] = [wx.NewId() for _init_coll_File_Items in range(3)]
 
 [wxID_FRAMEMENUFILECLOSE, wxID_FRAMEMENUFILEOPEN, wxID_FRAMEMENUFILEQUIT,
  wxID_FRAMEMENUFILESAVE, wxID_FRAMEMENUFILESAVEAS,
 ] = [wx.NewId() for _init_coll_menuFile_Items in range(5)]
 
-[wxID_FRAMEADD, wxID_FRAMEDELETE] = [wx.NewId() for _init_coll_buttons in
-                                     range(2)]
+[wxID_FRAMEADD, wxID_FRAMEDELETE,
+ wxID_FRAMEREFRESH] = [wx.NewId() for _init_coll_buttons in range(3)]
 
 class Frame(wx.Frame):
     def _init_coll_menuBar1_Menus(self, parent):
@@ -55,43 +53,93 @@ class Frame(wx.Frame):
         self._init_coll_menuBar1_Menus(self.menuBar1)
 
     def _init_ctrls(self, prnt):
+        self.lastLine = None
+        self.addLine = None
+        self.addButton = None
+        self.deleteButton = None
+        self.refreshButton = None
+
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_FRAME, name='', parent=prnt,
-              pos=wx.Point(0, 25), size=wx.Size(1910, 1114),
+              pos=wx.Point(0, 25), size=wx.Size(1300, 1114),
               style=wx.DEFAULT_FRAME_STYLE, title=u'Comptes')
         self._init_utils()
-        self.SetClientSize(wx.Size(1910, 1114))
+        self.SetClientSize(wx.Size(1300, 1114))
         self.SetMenuBar(self.menuBar1)
 
+        self.upperPanel = wx.Panel(id=wxID_FRAMEUPPERPANEL,
+                                   name=u'upper panel', parent=self,
+                                   pos=wx.Point(0,0), size=wx.Size(1280,25))
         self.scrolledWindow = wx.ScrolledWindow(id=wxID_FRAMESCROLLEDWINDOW,
-              name=u'scrolledWindow', parent=self, pos=wx.Point(0, 0),
-              size=wx.Size(1910, 1085), style=wx.HSCROLL | wx.VSCROLL)
+              name=u'scrolledWindow', parent=self, pos=wx.Point(0, 25),
+              size=wx.Size(1300, 850), style=wx.HSCROLL | wx.VSCROLL)
+        self.scrolledWindow.SetVirtualSize(size=wx.Size(1280, 300))
+        self.scrolledWindow.SetScrollRate(10,10)
+
+        self.lowerPanel = wx.Panel(id=wxID_FRAMELOWERPANEL,
+                                   name=u'lower panel', parent=self,
+                                   pos=wx.Point(0,850), size=wx.Size(1280,225))
 
         self.dateStaticText = wx.StaticText(id=wxID_FRAMEDATESTATICTEXT,
-              label=u'Date', name=u'dateStaticText', parent=self.scrolledWindow,
+              label=u'Date', name=u'dateStaticText', parent=self.upperPanel,
               pos=wx.Point(0, 8), size=wx.Size(100, 20), style=wx.ALIGN_CENTRE)
         self.dateStaticText.SetBackgroundColour(wx.Colour(4, 0, 0))
 
         self.modeStaticText = wx.StaticText(id=wxID_FRAMEMODESTATICTEXT,
               label=u'Mode de Paiement', name=u'modeStaticText',
-              parent=self.scrolledWindow, pos=wx.Point(100, 8),
+              parent=self.upperPanel, pos=wx.Point(100, 8),
               size=wx.Size(130, 20), style=wx.ALIGN_CENTRE)
 
         self.montantStaticText = wx.StaticText(id=wxID_FRAMEMONTANTSTATICTEXT,
               label=u'Montant', name=u'montantStaticText',
-              parent=self.scrolledWindow, pos=wx.Point(1100, 8),
+              parent=self.upperPanel, pos=wx.Point(1100, 8),
               size=wx.Size(150, 20), style=wx.ALIGN_CENTRE)
 
         self.bankStaticText = wx.StaticText(id=wxID_FRAMEBANKSTATICTEXT,
               label=u'Banque', name=u'bankStaticText',
-              parent=self.scrolledWindow, pos=wx.Point(1030, 8),
+              parent=self.upperPanel, pos=wx.Point(1030, 8),
               size=wx.Size(70, 20), style=wx.ALIGN_CENTRE)
         self.bankStaticText.SetHelpText(u'Cette entr\xe9e est-elle prise en compte par la banque ?')
 
         self.libelleStaticText = wx.StaticText(id=wxID_FRAMELIBELLESTATICTEXT,
               label=u'Libell\xe9', name=u'libelleStaticText',
-              parent=self.scrolledWindow, pos=wx.Point(230, 8),
+              parent=self.upperPanel, pos=wx.Point(230, 8),
               size=wx.Size(800, 20), style=wx.ALIGN_CENTRE)
+
+        # Last line
+        self.lastLine = LastLine(self.lowerPanel, total = 0,
+                                 totalBank = 0,
+                                 offset = 0)
+
+        # Add line
+        addEntry = entry.Entry(entry.dateToString(dt.date.today()), "", "", 0)
+        self.addLine = Line(self.lowerPanel, addEntry, 90)
+
+        # Add button
+        self.addButton = wx.Button(id=wxID_FRAMEADD, label=u'Ajouter',
+                                   name=u'add', parent=self.lowerPanel,
+                                   pos=wx.Point(0, 150),
+                                   size=wx.Size(85, 29), style=0)
+        self.addButton.Bind(wx.EVT_BUTTON, self.OnAddButton, id=wxID_FRAMEADD)
+
+        # Delete button
+        self.deleteButton = wx.Button(id=wxID_FRAMEDELETE, label=u'Supprimer',
+                                      name=u'delete', parent=self.lowerPanel,
+                                      pos=wx.Point(100, 150),
+                                      size=wx.Size(85, 29), style=0)
+        self.deleteButton.Bind(wx.EVT_BUTTON, self.OnDeleteButton,
+                               id=wxID_FRAMEDELETE)
+
+        # Refresh button
+        self.refreshButton = wx.Button(id=wxID_FRAMEREFRESH,
+                                       label=u'Recalculer',
+                                       name=u'refresh',
+                                       parent=self.lowerPanel,
+                                       pos=wx.Point(200, 150),
+                                       size=wx.Size(85, 29), style=0)
+        self.refreshButton.Bind(wx.EVT_BUTTON, self.OnRefreshButton,
+                               id=wxID_FRAMEREFRESH)
+
 
     def __init__(self, parent):
         self._init_ctrls(parent)
@@ -99,10 +147,6 @@ class Frame(wx.Frame):
         self.account = account.Account()
         self.filename = None
         self.lines = []
-        self.lastLine = None
-        self.addLine = None
-        self.addButton = None
-        self.deleteButton = None
         self.writeLines()
 
     def OnFileItems0Menu(self, event):
@@ -156,8 +200,13 @@ class Frame(wx.Frame):
         a = self.account
         newEntry = self.addLine.entry
         a.entries.append(newEntry)
+        self.scrolledWindow.SetVirtualSize(size=wx.Size(1280,
+                                                        yOffset*len(a.entries)
+                                                        +100))
         self.addLine.entry = None
-        self.writeLines()
+        # Create a new line
+        offset = yOffset*(len(a.entries)-1)
+        self.lines.append(LineSelect(self.scrolledWindow, newEntry, offset))
 
     def OnDeleteButton(self, event):
         """
@@ -173,6 +222,14 @@ class Frame(wx.Frame):
             a.entries.remove(l.entry)
         self.writeLines()
 
+    def OnRefreshButton(self, event):
+        a = self.account
+        a.sort()
+        for e, l in zip(a.entries, self.lines) :
+            l.bind_entry(e)
+        # recompute total
+        self.lastLine.set_values(total = a.balance, totalBank = a.bank_balance)
+
     def writeLines(self):
         # Destroy existing lines
         for l in self.lines :
@@ -181,45 +238,12 @@ class Frame(wx.Frame):
         a = self.account
         a.sort()
         offset = 0
-
         # Entry lines
         for e in a.entries :
-            self.lines.append(LineSelect(self, e, offset))
-            offset += 20
+            self.lines.append(LineSelect(self.scrolledWindow, e, offset))
+            offset += yOffset
 
-        # Last line
-        if self.lastLine :
-            self.lastLine.destroy()
-
-        self.lastLine = LastLine(self, total = a.balance,
-                                 totalBank = a.bank_balance,
-                                 offset = offset)
-
-        # Add line
-        if self.addLine :
-            self.addLine.destroy()
-        addEntry = entry.Entry(entry.dateToString(dt.date.today()), "", "", 0)
-        self.addLine = Line(self, addEntry, offset + 90)
-
-        # Add button
-        if self.addButton :
-            self.addButton.Destroy()
-
-        self.addButton = wx.Button(id=wxID_FRAMEADD, label=u'Ajouter',
-                                   name=u'add', parent=self.scrolledWindow,
-                                   pos=wx.Point(0, 150 + offset),
-              size=wx.Size(85, 29), style=0)
-        self.addButton.Bind(wx.EVT_BUTTON, self.OnAddButton, id=wxID_FRAMEADD)
-
-        # Delete button
-        if self.deleteButton :
-            self.deleteButton.Destroy()
-
-        self.deleteButton = wx.Button(id=wxID_FRAMEDELETE, label=u'Supprimer',
-                                   name=u'delete', parent=self.scrolledWindow,
-                                   pos=wx.Point(100, 150 + offset),
-              size=wx.Size(85, 29), style=0)
-        self.deleteButton.Bind(wx.EVT_BUTTON, self.OnDeleteButton,
-                               id=wxID_FRAMEDELETE)
-
+        self.scrolledWindow.SetVirtualSize(size=wx.Size(1280,
+                                                        yOffset*len(a.entries)
+                                                        +100))
         self.Refresh()

@@ -3,15 +3,13 @@ import datetime as dt
 import decimal
 import entry
 
-[wxID_FRAME, wxID_FRAMEBANKCHECKBOX1, wxID_FRAMEBANKSTATICTEXT,
- wxID_FRAMEDATESTATICTEXT, wxID_FRAMEDATETEXTCTRL1,
- wxID_FRAMELIBELLESTATICTEXT, wxID_FRAMELIBELLETEXTCTRL1,
- wxID_FRAMEMODESTATICTEXT, wxID_FRAMEMODETEXTCTRL1,
- wxID_FRAMEMONTANTSTATICTEXT, wxID_FRAMEMONTANTTEXTCTRL1,
- wxID_FRAMESCROLLEDWINDOW, wxID_FRAMESELECTCHECKBOX1,
- wxID_FRAMETOTALBANKTEXTCTRL, wxID_FRAMETOTALBANQUESTATICTEXT,
- wxID_FRAMETOTALSTATICTEXT, wxID_FRAMETOTALTEXTCTRL,
-] = [wx.NewId() for _init_ctrls in range(17)]
+[wxID_FRAME, wxID_FRAMEBANKSTATICTEXT, wxID_FRAMEDATESTATICTEXT,
+ wxID_FRAMELIBELLESTATICTEXT, wxID_FRAMEMODESTATICTEXT,
+ wxID_FRAMEMONTANTSTATICTEXT, wxID_FRAMEUPPERPANEL,
+ wxID_FRAMESCROLLEDWINDOW, wxID_FRAMETOTALBANKTEXTCTRL, wxID_FRAMELOWERPANEL,
+ wxID_FRAMETOTALBANQUESTATICTEXT, wxID_FRAMETOTALSTATICTEXT,
+ wxID_FRAMETOTALTEXTCTRL,
+] = [wx.NewId() for _init_ctrls in range(13)]
 
 class Line (object) :
     """
@@ -20,146 +18,159 @@ class Line (object) :
     def __init__(self, par, e, offset = 0) :
         self.entry = e
         self.frame = par
-        self.dateTextCtrl1 = wx.TextCtrl(id=wxID_FRAMEDATETEXTCTRL1,
-              name=u'dateTextCtrl1', parent=par.scrolledWindow, pos=wx.Point(0,
+        newId = wx.NewId()
+        self.dateTextCtrl = wx.TextCtrl(id=newId,
+              name=u'dateTextCtrl', parent=par, pos=wx.Point(0,
               32+offset), size=wx.Size(99, 19), style=0, value=str(entry.dateToString(e.date)))
-        self.dateTextCtrl1.Bind(wx.EVT_TEXT_MAXLEN,
-              self.OnDateTextCtrl1TextMaxlen, id=wxID_FRAMEDATETEXTCTRL1)
-        self.dateTextCtrl1.Bind(wx.EVT_TEXT_URL, self.OnDateTextCtrl1TextUrl,
-              id=wxID_FRAMEDATETEXTCTRL1)
-        self.dateTextCtrl1.Bind(wx.EVT_TEXT_ENTER,
-              self.OnDateTextCtrl1TextEnter, id=wxID_FRAMEDATETEXTCTRL1)
-        self.dateTextCtrl1.Bind(wx.EVT_TEXT, self.OnDateTextCtrl1Text,
-              id=wxID_FRAMEDATETEXTCTRL1)
+        self.dateTextCtrl.Bind(wx.EVT_TEXT_MAXLEN,
+              self.OnDateTextCtrlTextMaxlen, id=newId)
+        self.dateTextCtrl.Bind(wx.EVT_TEXT_URL, self.OnDateTextCtrlTextUrl,
+              id=newId)
+        self.dateTextCtrl.Bind(wx.EVT_TEXT_ENTER,
+              self.OnDateTextCtrlTextEnter, id=newId)
+        self.dateTextCtrl.Bind(wx.EVT_TEXT, self.OnDateTextCtrlText,
+              id=newId)
 
-        self.modeTextCtrl1 = wx.TextCtrl(id=wxID_FRAMEMODETEXTCTRL1,
-              name=u'modeTextCtrl1', parent=par.scrolledWindow,
+        newId = wx.NewId()
+        self.modeTextCtrl = wx.TextCtrl(id=newId,
+              name=u'modeTextCtrl', parent=par,
               pos=wx.Point(100, 32+offset), size=wx.Size(129, 19), style=0,
               value=e.mode)
 
-        self.modeTextCtrl1.Bind(wx.EVT_TEXT_MAXLEN,
-              self.OnModeTextCtrl1TextMaxlen, id=wxID_FRAMEMODETEXTCTRL1)
-        self.modeTextCtrl1.Bind(wx.EVT_TEXT_URL, self.OnModeTextCtrl1TextUrl,
-              id=wxID_FRAMEMODETEXTCTRL1)
-        self.modeTextCtrl1.Bind(wx.EVT_TEXT_ENTER,
-              self.OnModeTextCtrl1TextEnter, id=wxID_FRAMEMODETEXTCTRL1)
-        self.modeTextCtrl1.Bind(wx.EVT_TEXT, self.OnModeTextCtrl1Text,
-              id=wxID_FRAMEMODETEXTCTRL1)
+        self.modeTextCtrl.Bind(wx.EVT_TEXT_MAXLEN,
+              self.OnModeTextCtrlTextMaxlen, id=newId)
+        self.modeTextCtrl.Bind(wx.EVT_TEXT_URL, self.OnModeTextCtrlTextUrl,
+              id=newId)
+        self.modeTextCtrl.Bind(wx.EVT_TEXT_ENTER,
+              self.OnModeTextCtrlTextEnter, id=newId)
+        self.modeTextCtrl.Bind(wx.EVT_TEXT, self.OnModeTextCtrlText,
+              id=newId)
 
-        self.libelleTextCtrl1 = wx.TextCtrl(id=wxID_FRAMELIBELLETEXTCTRL1,
-              name=u'libelleTextCtrl1', parent=par.scrolledWindow,
+        newId = wx.NewId()
+        self.libelleTextCtrl = wx.TextCtrl(id=newId,
+              name=u'libelleTextCtrl', parent=par,
               pos=wx.Point(230, 32+offset), size=wx.Size(799, 19), style=0,
               value=e.label)
-        self.libelleTextCtrl1.Bind(wx.EVT_TEXT_URL,
-              self.OnLibelleTextCtrl1TextUrl, id=wxID_FRAMELIBELLETEXTCTRL1)
-        self.libelleTextCtrl1.Bind(wx.EVT_TEXT_MAXLEN,
-              self.OnLibelleTextCtrl1TextMaxlen, id=wxID_FRAMELIBELLETEXTCTRL1)
-        self.libelleTextCtrl1.Bind(wx.EVT_TEXT_ENTER,
-              self.OnLibelleTextCtrl1TextEnter, id=wxID_FRAMELIBELLETEXTCTRL1)
-        self.libelleTextCtrl1.Bind(wx.EVT_TEXT, self.OnLibelleTextCtrl1Text,
-              id=wxID_FRAMELIBELLETEXTCTRL1)
+        self.libelleTextCtrl.Bind(wx.EVT_TEXT_URL,
+              self.OnLibelleTextCtrlTextUrl, id=newId)
+        self.libelleTextCtrl.Bind(wx.EVT_TEXT_MAXLEN,
+              self.OnLibelleTextCtrlTextMaxlen, id=newId)
+        self.libelleTextCtrl.Bind(wx.EVT_TEXT_ENTER,
+              self.OnLibelleTextCtrlTextEnter, id=newId)
+        self.libelleTextCtrl.Bind(wx.EVT_TEXT, self.OnLibelleTextCtrlText,
+              id=newId)
 
-        self.bankCheckBox1 = wx.CheckBox(id=wxID_FRAMEBANKCHECKBOX1, label=u'',
-              name=u'bankCheckBox1', parent=par.scrolledWindow,
+        newId = wx.NewId()
+        self.bankCheckBox = wx.CheckBox(id=newId, label=u'',
+              name=u'bankCheckBox', parent=par,
               pos=wx.Point(1048, 32+offset), size=wx.Size(19, 19), style=0)
-        self.bankCheckBox1.SetValue(e.bank)
-        self.bankCheckBox1.Bind(wx.EVT_CHECKBOX, self.OnBankCheckBox1Checkbox,
-              id=wxID_FRAMEBANKCHECKBOX1)
-        self.bankCheckBox1.Bind(wx.EVT_HELP, self.OnBankCheckBox1Help,
-              id=wxID_FRAMEBANKCHECKBOX1)
+        self.bankCheckBox.SetValue(e.bank)
+        self.bankCheckBox.Bind(wx.EVT_CHECKBOX, self.OnBankCheckBoxCheckbox,
+              id=newId)
+        self.bankCheckBox.Bind(wx.EVT_HELP, self.OnBankCheckBoxHelp,
+              id=newId)
 
-        self.montantTextCtrl1 = wx.TextCtrl(id=wxID_FRAMEMONTANTTEXTCTRL1,
-              name=u'montantTextCtrl1', parent=par.scrolledWindow,
+        newId = wx.NewId()
+        self.montantTextCtrl = wx.TextCtrl(id=newId,
+              name=u'montantTextCtrl', parent=par,
               pos=wx.Point(1100, 32+offset), size=wx.Size(149, 19), style=wx.TE_RIGHT,
               value=str(e.amount))
 
-        self.montantTextCtrl1.Bind(wx.EVT_TEXT_MAXLEN,
-              self.OnMontantTextCtrl1TextMaxlen, id=wxID_FRAMEMONTANTTEXTCTRL1)
-        self.montantTextCtrl1.Bind(wx.EVT_TEXT_URL,
-              self.OnMontantTextCtrl1TextUrl, id=wxID_FRAMEMONTANTTEXTCTRL1)
-        self.montantTextCtrl1.Bind(wx.EVT_TEXT_ENTER,
-              self.OnMontantTextCtrl1TextEnter, id=wxID_FRAMEMONTANTTEXTCTRL1)
-        self.montantTextCtrl1.Bind(wx.EVT_TEXT, self.OnMontantTextCtrl1Text,
-              id=wxID_FRAMEMONTANTTEXTCTRL1)
+        self.montantTextCtrl.Bind(wx.EVT_TEXT_MAXLEN,
+              self.OnMontantTextCtrlTextMaxlen, id=newId)
+        self.montantTextCtrl.Bind(wx.EVT_TEXT_URL,
+              self.OnMontantTextCtrlTextUrl, id=newId)
+        self.montantTextCtrl.Bind(wx.EVT_TEXT_ENTER,
+              self.OnMontantTextCtrlTextEnter, id=newId)
+        self.montantTextCtrl.Bind(wx.EVT_TEXT, self.OnMontantTextCtrlText,
+              id=newId)
 
-    def OnBankCheckBox1Checkbox(self, event):
-        self.entry.bank = self.bankCheckBox1.GetValue()
+    def OnBankCheckBoxCheckbox(self, event):
+        self.entry.bank = self.bankCheckBox.GetValue()
 
-    def OnBankCheckBox1Help(self, event):
-        print "OnBankCheckBox1Help"
+    def OnBankCheckBoxHelp(self, event):
+        print "OnBankCheckBoxHelp"
 
-    def OnDateTextCtrl1TextMaxlen(self, event):
-        print "OnDateTextCtrl1TextMaxlen"
+    def OnDateTextCtrlTextMaxlen(self, event):
+        print "OnDateTextCtrlTextMaxlen"
 
-    def OnDateTextCtrl1TextUrl(self, event):
-        print "OnDateTextCtrl1TextUrl"
+    def OnDateTextCtrlTextUrl(self, event):
+        print "OnDateTextCtrlTextUrl"
 
-    def OnDateTextCtrl1TextEnter(self, event):
-        print "OnDateTextCtrl1TextEnter"
+    def OnDateTextCtrlTextEnter(self, event):
+        print "OnDateTextCtrlTextEnter"
 
-    def OnDateTextCtrl1Text(self, event):
-        newDate = self.dateTextCtrl1.GetValue()
+    def OnDateTextCtrlText(self, event):
+        newDate = self.dateTextCtrl.GetValue()
         self.entry.date = entry.stringToDate(newDate)
 
-    def OnModeTextCtrl1TextMaxlen(self, event):
-        print "OnModeTextCtrl1TextMaxlen"
+    def OnModeTextCtrlTextMaxlen(self, event):
+        print "OnModeTextCtrlTextMaxlen"
 
-    def OnModeTextCtrl1TextUrl(self, event):
-        print "OnModeTextCtrl1TextUrl"
+    def OnModeTextCtrlTextUrl(self, event):
+        print "OnModeTextCtrlTextUrl"
 
-    def OnModeTextCtrl1TextEnter(self, event):
-        print "OnModeTextCtrl1TextEnter"
+    def OnModeTextCtrlTextEnter(self, event):
+        print "OnModeTextCtrlTextEnter"
 
-    def OnModeTextCtrl1Text(self, event):
-        self.entry.mode = self.modeTextCtrl1.GetValue()
+    def OnModeTextCtrlText(self, event):
+        self.entry.mode = self.modeTextCtrl.GetValue()
 
-    def OnLibelleTextCtrl1TextUrl(self, event):
-        print "OnLibelleTextCtrl1TextUrl"
+    def OnLibelleTextCtrlTextUrl(self, event):
+        print "OnLibelleTextCtrlTextUrl"
 
-    def OnLibelleTextCtrl1TextMaxlen(self, event):
-        print "OnLibelleTextCtrl1TextMaxlen"
+    def OnLibelleTextCtrlTextMaxlen(self, event):
+        print "OnLibelleTextCtrlTextMaxlen"
 
-    def OnLibelleTextCtrl1TextEnter(self, event):
-        print "OnLibelleTextCtrl1TextEnter"
+    def OnLibelleTextCtrlTextEnter(self, event):
+        print "OnLibelleTextCtrlTextEnter"
 
-    def OnLibelleTextCtrl1Text(self, event):
-        self.entry.label = self.libelleTextCtrl1.GetValue()
+    def OnLibelleTextCtrlText(self, event):
+        self.entry.label = self.libelleTextCtrl.GetValue()
 
-    def OnMontantTextCtrl1TextMaxlen(self, event):
-        print "OnMontantTextCtrl1TextMaxlen"
+    def OnMontantTextCtrlTextMaxlen(self, event):
+        print "OnMontantTextCtrlTextMaxlen"
 
-    def OnMontantTextCtrl1TextUrl(self, event):
-        print "OnMontantTextCtrl1TextUrl"
+    def OnMontantTextCtrlTextUrl(self, event):
+        print "OnMontantTextCtrlTextUrl"
 
-    def OnMontantTextCtrl1TextEnter(self, event):
-        print "OnMontantTextCtrl1TextEnter"
+    def OnMontantTextCtrlTextEnter(self, event):
+        print "OnMontantTextCtrlTextEnter"
 
-    def OnMontantTextCtrl1Text(self, event):
-        self.entry.amount = decimal.Decimal(self.montantTextCtrl1.GetValue())
+    def OnMontantTextCtrlText(self, event):
+        self.entry.amount = decimal.Decimal(self.montantTextCtrl.GetValue())
+
+    def bind_entry(self, e) :
+        self.entry = e
+        self.dateTextCtrl.SetValue(entry.dateToString(e.date))
+        self.modeTextCtrl.SetValue(e.mode)
+        self.libelleTextCtrl.SetValue(e.label)
+        self.bankCheckBox.SetValue(e.bank)
+        self.montantTextCtrl.SetValue(str(e.amount))
 
     def destroy(self) :
-        self.dateTextCtrl1.Destroy()
-        self.dateTextCtrl1 = None
-        self.modeTextCtrl1.Destroy()
-        self.modeTextCtrl1 = None
-        self.libelleTextCtrl1.Destroy()
-        self.libelleTextCtrl1 = None
-        self.bankCheckBox1.Destroy()
-        self.bankCheckBox1 = None
-        self.montantTextCtrl1.Destroy()
-        self.montantTextCtrl1 = None
+        self.dateTextCtrl.Destroy()
+        self.dateTextCtrl = None
+        self.modeTextCtrl.Destroy()
+        self.modeTextCtrl = None
+        self.libelleTextCtrl.Destroy()
+        self.libelleTextCtrl = None
+        self.bankCheckBox.Destroy()
+        self.bankCheckBox = None
+        self.montantTextCtrl.Destroy()
+        self.montantTextCtrl = None
 
 class LineSelect (Line) :
     def __init__(self, par, e, offset = 0) :
         Line.__init__(self, par, e, offset)
-        self.selectCheckBox1 = wx.CheckBox(id=wxID_FRAMESELECTCHECKBOX1,
-              label=u'', name=u'selectCheckBox1', parent=par.scrolledWindow,
+        self.selectCheckBox = wx.CheckBox(id=wx.NewId(),
+              label=u'', name=u'selectCheckBox', parent=par,
               pos=wx.Point(1264, 32+offset), size=wx.Size(19, 19), style=0)
-        self.selectCheckBox1.SetValue(False)
+        self.selectCheckBox.SetValue(False)
 
     def destroy(self) :
-        self.selectCheckBox1.Destroy()
-        self.selectCheckBox1 = None
+        self.selectCheckBox.Destroy()
+        self.selectCheckBox = None
         Line.destroy(self)
 
 class LastLine (object) :
@@ -169,23 +180,27 @@ class LastLine (object) :
     def __init__(self, prnt, total, totalBank, offset = 0):
         self.totalBanqueStaticText = wx.StaticText(id=wxID_FRAMETOTALBANQUESTATICTEXT,
               label=u'Total banque', name=u'totalBanqueStaticText',
-              parent=prnt.scrolledWindow, pos=wx.Point(900, 82+offset),
+              parent=prnt, pos=wx.Point(900, 82+offset),
               size=wx.Size(129, 19), style=0)
 
         self.totalStaticText = wx.StaticText(id=wxID_FRAMETOTALSTATICTEXT,
               label=u'Total', name=u'totalStaticText',
-              parent=prnt.scrolledWindow, pos=wx.Point(900, 62+offset),
+              parent=prnt, pos=wx.Point(900, 62+offset),
               size=wx.Size(129, 20), style=0)
 
         self.totalTextCtrl = wx.TextCtrl(id=wxID_FRAMETOTALTEXTCTRL,
-              name=u'totalTextCtrl', parent=prnt.scrolledWindow,
+              name=u'totalTextCtrl', parent=prnt,
               pos=wx.Point(1100, 62+offset), size=wx.Size(149, 19), style=wx.TE_RIGHT,
               value=str(total))
 
         self.totalBankTextCtrl = wx.TextCtrl(id=wxID_FRAMETOTALBANKTEXTCTRL,
-              name=u'totalBankTextCtrl', parent=prnt.scrolledWindow,
+              name=u'totalBankTextCtrl', parent=prnt,
               pos=wx.Point(1100, 82+offset), size=wx.Size(149, 19), style=wx.TE_RIGHT,
               value=str(totalBank))
+
+    def set_values(self, total, totalBank) :
+        self.totalTextCtrl.SetValue(str(total))
+        self.totalBankTextCtrl.SetValue(str(totalBank))
 
     def destroy(self):
         self.totalBanqueStaticText.Destroy()
