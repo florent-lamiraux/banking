@@ -20,7 +20,9 @@ class Entry (object) :
 
     def __str__(self):
         output = dateToString(self.date)
-        output +="\t"+self.mode+"\t"+self.label+"\t"+str(self.amount)
+        output +="\t"+self.mode
+        output +="\t"+self.label
+        output +="\t"+str(self.amount)
         output +="\t"+str(self.bank)
         return output
 
