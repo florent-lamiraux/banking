@@ -227,7 +227,7 @@ class Frame(wx.Frame):
         a = self.account
         deleteLines = []
         for l in self.lines :
-            if l.selectCheckBox1.GetValue() :
+            if l.selectCheckBox.GetValue() :
                 deleteLines.append(l)
 
         self.deleteLastLines(len(deleteLines))
