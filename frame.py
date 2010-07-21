@@ -242,6 +242,7 @@ class Frame(wx.Frame):
         a.sort()
         for e, l in zip(a.entries, self.lines) :
             l.bind_entry(e)
+            l.selectCheckBox.SetValue(False)
         # recompute total
         self.lastLine.set_values(total = a.balance, totalBank = a.bank_balance)
 
