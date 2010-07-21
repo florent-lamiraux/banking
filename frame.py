@@ -231,6 +231,9 @@ class Frame(wx.Frame):
         self.lastLine.set_values(total = a.balance, totalBank = a.bank_balance)
 
     def writeLines(self):
+        """
+        Write entries in lines
+        """
         # Destroy existing lines
         for l in self.lines :
             l.destroy()
@@ -243,7 +246,11 @@ class Frame(wx.Frame):
             self.lines.append(LineSelect(self.scrolledWindow, e, offset))
             offset += yOffset
 
+        # Resize the window
         self.scrolledWindow.SetVirtualSize(size=wx.Size(1280,
                                                         yOffset*len(a.entries)
                                                         +100))
+        # recompute total
+        self.lastLine.set_values(total = a.balance, totalBank = a.bank_balance)
+        
         self.Refresh()
