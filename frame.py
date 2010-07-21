@@ -13,7 +13,8 @@ def create(parent):
 ] = [wx.NewId() for _init_coll_menuFile_Items in range(5)]
 
 [wxID_FRAMEADD, wxID_FRAMEDELETE,
- wxID_FRAMEREFRESH] = [wx.NewId() for _init_coll_buttons in range(3)]
+ wxID_FRAMEREFRESH, wxID_FRAMEBANKORDER] = [wx.NewId() for _init_coll_buttons
+                                            in range(4)]
 
 class Frame(wx.Frame):
     def _init_coll_menuBar1_Menus(self, parent):
@@ -58,6 +59,7 @@ class Frame(wx.Frame):
         self.addButton = None
         self.deleteButton = None
         self.refreshButton = None
+        self.bankOrderButton = None
 
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_FRAME, name='', parent=prnt,
@@ -139,6 +141,16 @@ class Frame(wx.Frame):
                                        size=wx.Size(85, 29), style=0)
         self.refreshButton.Bind(wx.EVT_BUTTON, self.OnRefreshButton,
                                id=wxID_FRAMEREFRESH)
+
+        # BankOrder button
+        self.bankOrderButton = wx.Button(id=wxID_FRAMEBANKORDER,
+                                       label=u'Ordre relev\xe9',
+                                       name=u'bankOrder',
+                                       parent=self.lowerPanel,
+                                       pos=wx.Point(295, 150),
+                                       size=wx.Size(100, 29), style=0)
+        self.bankOrderButton.Bind(wx.EVT_BUTTON, self.OnBankOrderButton,
+                                  id=wxID_FRAMEBANKORDER)
 
 
     def __init__(self, parent):
@@ -225,6 +237,14 @@ class Frame(wx.Frame):
     def OnRefreshButton(self, event):
         a = self.account
         a.sort()
+        for e, l in zip(a.entries, self.lines) :
+            l.bind_entry(e)
+        # recompute total
+        self.lastLine.set_values(total = a.balance, totalBank = a.bank_balance)
+
+    def OnBankOrderButton(self, event):
+        a = self.account
+        a.sort(account.bankOrder)
         for e, l in zip(a.entries, self.lines) :
             l.bind_entry(e)
         # recompute total
