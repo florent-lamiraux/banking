@@ -211,12 +211,11 @@ class Frame(wx.Frame):
         """
         self.scrolledWindow.Scroll(0,0)
         a = self.account
-        newEntry = self.addLine.entry
+        newEntry = self.addLine.entry.copy()
         a.entries.append(newEntry)
         self.scrolledWindow.SetVirtualSize(size=wx.Size(1280,
                                                         yOffset*len(a.entries)
                                                         +100))
-        self.addLine.entry = None
         # Create a new line
         offset = yOffset*(len(a.entries)-1)
         self.lines.append(LineSelect(self.scrolledWindow, newEntry, offset))

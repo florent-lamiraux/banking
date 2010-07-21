@@ -18,6 +18,15 @@ class Entry (object) :
         self.amount = decimal.Decimal(amount)
         self.bank = False
 
+    def copy(self):
+        """
+        Copy the object
+        """
+        e = Entry(dateToString(self.date), self.mode, self.label,
+                  str(self.amount))
+        e.bank = self.bank
+        return e
+
     def __str__(self):
         output = dateToString(self.date)
         output +="\t"+self.mode
