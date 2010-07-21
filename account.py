@@ -123,9 +123,9 @@ if __name__ == "__main__":
     a = Account()
     a.add_entry("01/07/2010", "Sans objet", "Montant initial", "5000")
     a.add_entry("09/07/2010", "CB Florent", "Chronodrive.com", "-83.12")
-    a.add_entry("10/07/2010", "CB Aurélie",
-                "Crédit Lyonnais Toulouse Montplaisir", "-500")
-    a.add_entry("09/07/2010", "CB Aurélie", "Crédit Agricole Toulouse Rangueil",
+    a.add_entry("10/07/2010", u"CB Aurélie",
+                u"Crédit Lyonnais Toulouse Montplaisir", "-500")
+    a.add_entry("09/07/2010", u"CB Aurélie", u"Crédit Agricole Toulouse Rangueil",
                 "-500")
     a.entries[0].bank = True
     a.entries[1].bank = True
