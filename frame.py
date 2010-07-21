@@ -209,6 +209,7 @@ class Frame(wx.Frame):
         """
         Call back to add a line in the book
         """
+        self.scrolledWindow.Scroll(0,0)
         a = self.account
         newEntry = self.addLine.entry
         a.entries.append(newEntry)
@@ -230,9 +231,12 @@ class Frame(wx.Frame):
             if l.selectCheckBox1.GetValue() :
                 deleteLines.append(l)
 
+        self.deleteLastLines(len(deleteLines))
+
         for l in deleteLines :
             a.entries.remove(l.entry)
-        self.writeLines()
+
+        self.OnRefreshButton(event)
 
     def OnRefreshButton(self, event):
         a = self.account
@@ -250,10 +254,19 @@ class Frame(wx.Frame):
         # recompute total
         self.lastLine.set_values(total = a.balance, totalBank = a.bank_balance)
 
+    def deleteLastLines(self, n):
+        """
+        Delete the last n lines
+        """
+        for l in self.lines[-n:]:
+            l.destroy()
+        self.lines = self.lines[:-n]
+
     def writeLines(self):
         """
         Write entries in lines
         """
+        self.scrolledWindow.Scroll(0,0)
         # Destroy existing lines
         for l in self.lines :
             l.destroy()
@@ -272,5 +285,5 @@ class Frame(wx.Frame):
                                                         +100))
         # recompute total
         self.lastLine.set_values(total = a.balance, totalBank = a.bank_balance)
-        
+
         self.Refresh()
