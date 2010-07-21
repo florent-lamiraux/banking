@@ -131,5 +131,4 @@ if __name__ == "__main__":
     a.entries[1].bank = True
 
     a.sort()
-    with open("test-comptes.cpt", "w") as f:
-        f.write (str(a))
+    a.save('test-comptes.cpt')
