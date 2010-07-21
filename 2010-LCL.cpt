@@ -30,7 +30,7 @@
 22/ 3/2010	CB Aurélie	Boucherie	-72.00	True
 22/ 3/2010	CB Aurélie	Ombres Blanches	-84.40	True
 22/ 3/2010	Prél. Autom.	Gaz de France	-6.87	True
-23/ 3/2010	ECB	Casino	-200.27	True
+23/ 3/2010	e-CB	Casino	-200.27	True
 25/ 3/2010	Virement	Remboursement CPAM	4.60	True
 25/ 3/2010	CB Aurélie	Baillardran	-24.60	True
 26/ 3/2010	CB Aurélie	Picard	-13.45	True
@@ -40,11 +40,11 @@
 27/ 3/2010	CB Aurélie	Retrait Crédit Lyonnais Alsace Lorraine	-500.00	True
 30/ 3/2010	CB Aurélie	Monoprix	-80.45	True
 30/ 3/2010	CB Aurélie	Monoprix	-49.22	True
-31/ 3/2010	ECB	Le bon coin	-2.00	True
+31/ 3/2010	e-CB	Le bon coin	-2.00	True
  1/ 4/2010	Prél. Autom.	Abonnement LCL en ligne	-3.50	True
  2/ 4/2010	CB Aurélie	Boucherie	-31.98	True
  2/ 4/2010	CB Aurélie	Petit Casino	-38.06	True
- 5/ 4/2010	E-Carte Bleue	Casino	-178.26	True
+ 5/ 4/2010	e-CB	Casino	-178.26	True
  6/ 4/2010	CB Aurélie	FNAC Eveil et Jeux	-22.80	True
  6/ 4/2010	CB Aurélie	Galeries Lafayettes	-49.00	True
  6/ 4/2010	Virement	CAF Aurélie	834.42	True
@@ -85,15 +85,15 @@
 24/ 4/2010	CB Aurélie	Petit Casino	-39.08	True
 24/ 4/2010	CB Aurélie	Boucherie	-139.51	True
 26/ 4/2010	CHQ9980856	Médecin	-25.00	True
-26/ 4/2010	E-Carte Bleue	Casino	-146.55	True
+26/ 4/2010	e-CB	Casino	-146.55	True
 26/ 4/2010	Virement	MGEN	21.00	True
 26/ 4/2010	Virement	MGEN	27.00	True
 27/ 4/2010	Virement	MGEN	27.00	True
 27/ 4/2010	CB Florent	Relay H Purpan	-17.80	True
 27/ 4/2010	Prél. Autom.	Corisation Carte Aurélie	-19.50	True
 28/ 4/2010	Virement	Salaire CNRS	4342.04	True
-30/ 4/2010	CB	Petit Casino	-14.12	True
-30/ 4/2010	CB	Boucherie	-22.04	True
+30/ 4/2010	CB Aurélie	Petit Casino	-14.12	True
+30/ 4/2010	CB Aurélie	Boucherie	-22.04	True
 30/ 4/2010	Prél. Autom.	Charges copropriété	-161.56	True
 30/ 4/2010	Virement	MGEN	25.00	True
  2/ 5/2010	CB Aurélie	Retrait Crédit Agricole Bedouce	-200.00	True
@@ -161,8 +161,8 @@
  5/ 6/2010	CB Florent	Chronodrive.com	-76.37	True
  6/ 6/2010	CB Florent	Retrat Crédit Lyonnais Montplaisir	-500.00	True
  7/ 6/2010	Prél. Autom.	MGEN	-93.00	True
- 7/ 6/2010	Prél. Autom.	MGEN	65.74	False
- 7/ 6/2010	Prél. Autom.	MGEN	53.88	False
+ 7/ 6/2010	Virement	MGEN	65.74	False
+ 7/ 6/2010	Virement	MGEN	53.88	False
  7/ 6/2010	CHQ9980792	Examen Aurélie	-87.21	False
  8/ 6/2010	Prél. Autom.	Electricité	-31.22	False
  8/ 6/2010	CHQ9980870	Photos classe Luce	-4.50	False
