@@ -26,6 +26,13 @@ class Entry (object) :
         output +="\t"+str(self.bank)
         return output
 
+    def save(self, f):
+        f.write(dateToString(self.date))
+        f.write("\t"+self.mode)
+        f.write("\t"+self.label)
+        f.write("\t"+str(self.amount))
+        f.write("\t"+str(self.bank))
+
 def stringToDate(dateStr) :
     d = re.split("/", dateStr)
     if len(d) is not 3:

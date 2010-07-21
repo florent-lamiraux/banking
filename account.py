@@ -2,6 +2,7 @@
 
 import re
 from entry import *
+import codecs
 
 class Account (object) :
 
@@ -37,7 +38,7 @@ class Account (object) :
         """
         self.entries = []
         ln = 0
-        with open(filename, "r") as f :
+        with codecs.open(filename, 'r', encoding='utf-8') as f :
             line = f.readline()
             ln += 1
             while line != "\n" :
@@ -60,8 +61,14 @@ class Account (object) :
         """
         Write data in a file
         """
-        with open(filename, "w") as f :
-            f.write(str(self))
+        with codecs.open(filename, 'w', encoding='utf-8') as f :
+            for e in self.entries :
+                e.save(f)
+                f.write('\n')
+
+            f.write( "\n")
+            f.write( 3*"\t"+"balance: "+str(self.balance))
+            f.write( "\t"+"bank: "+str(self.bank_balance))
 
     def sort (self) :
         """
