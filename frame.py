@@ -92,8 +92,8 @@ class Frame(wx.Frame):
               parent=self.upperPanel, pos=wx.Point(100, 8),
               size=wx.Size(130, 20), style=wx.ALIGN_CENTRE)
 
-        self.montantStaticText = wx.StaticText(id=wxID_FRAMEMONTANTSTATICTEXT,
-              label=u'Montant', name=u'montantStaticText',
+        self.amountStaticText = wx.StaticText(id=wxID_FRAMEAMOUNTSTATICTEXT,
+              label=u'Montant', name=u'amountStaticText',
               parent=self.upperPanel, pos=wx.Point(1100, 8),
               size=wx.Size(150, 20), style=wx.ALIGN_CENTRE)
 
@@ -103,8 +103,8 @@ class Frame(wx.Frame):
               size=wx.Size(70, 20), style=wx.ALIGN_CENTRE)
         self.bankStaticText.SetHelpText(u'Cette entr\xe9e est-elle prise en compte par la banque ?')
 
-        self.libelleStaticText = wx.StaticText(id=wxID_FRAMELIBELLESTATICTEXT,
-              label=u'Libell\xe9', name=u'libelleStaticText',
+        self.labelStaticText = wx.StaticText(id=wxID_FRAMELABELSTATICTEXT,
+              label=u'Libell\xe9', name=u'labelStaticText',
               parent=self.upperPanel, pos=wx.Point(230, 8),
               size=wx.Size(800, 20), style=wx.ALIGN_CENTRE)
 

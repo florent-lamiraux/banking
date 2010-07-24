@@ -4,8 +4,8 @@ import decimal
 import entry
 
 [wxID_FRAME, wxID_FRAMEBANKSTATICTEXT, wxID_FRAMEDATESTATICTEXT,
- wxID_FRAMELIBELLESTATICTEXT, wxID_FRAMEMODESTATICTEXT,
- wxID_FRAMEMONTANTSTATICTEXT, wxID_FRAMEUPPERPANEL,
+ wxID_FRAMELABELSTATICTEXT, wxID_FRAMEMODESTATICTEXT,
+ wxID_FRAMEAMOUNTSTATICTEXT, wxID_FRAMEUPPERPANEL,
  wxID_FRAMESCROLLEDWINDOW, wxID_FRAMETOTALBANKTEXTCTRL, wxID_FRAMELOWERPANEL,
  wxID_FRAMETOTALBANQUESTATICTEXT, wxID_FRAMETOTALSTATICTEXT,
  wxID_FRAMETOTALTEXTCTRL,
@@ -48,17 +48,17 @@ class Line (object) :
               id=newId)
 
         newId = wx.NewId()
-        self.libelleTextCtrl = wx.TextCtrl(id=newId,
-              name=u'libelleTextCtrl', parent=par,
+        self.labelTextCtrl = wx.TextCtrl(id=newId,
+              name=u'labelTextCtrl', parent=par,
               pos=wx.Point(230, 32+offset), size=wx.Size(799, 19), style=0,
               value=e.label)
-        self.libelleTextCtrl.Bind(wx.EVT_TEXT_URL,
-              self.OnLibelleTextCtrlTextUrl, id=newId)
-        self.libelleTextCtrl.Bind(wx.EVT_TEXT_MAXLEN,
-              self.OnLibelleTextCtrlTextMaxlen, id=newId)
-        self.libelleTextCtrl.Bind(wx.EVT_TEXT_ENTER,
-              self.OnLibelleTextCtrlTextEnter, id=newId)
-        self.libelleTextCtrl.Bind(wx.EVT_TEXT, self.OnLibelleTextCtrlText,
+        self.labelTextCtrl.Bind(wx.EVT_TEXT_URL,
+              self.OnLabelTextCtrlTextUrl, id=newId)
+        self.labelTextCtrl.Bind(wx.EVT_TEXT_MAXLEN,
+              self.OnLabelTextCtrlTextMaxlen, id=newId)
+        self.labelTextCtrl.Bind(wx.EVT_TEXT_ENTER,
+              self.OnLabelTextCtrlTextEnter, id=newId)
+        self.labelTextCtrl.Bind(wx.EVT_TEXT, self.OnLabelTextCtrlText,
               id=newId)
 
         newId = wx.NewId()
@@ -72,19 +72,19 @@ class Line (object) :
               id=newId)
 
         newId = wx.NewId()
-        self.montantTextCtrl = wx.TextCtrl(id=newId,
-              name=u'montantTextCtrl', parent=par,
+        self.amountTextCtrl = wx.TextCtrl(id=newId,
+              name=u'amountTextCtrl', parent=par,
               pos=wx.Point(1100, 32+offset), size=wx.Size(149, 19),
               style=wx.TE_RIGHT|wx.TE_PROCESS_ENTER,
               value=str(e.amount))
 
-        self.montantTextCtrl.Bind(wx.EVT_TEXT_MAXLEN,
-              self.OnMontantTextCtrlTextMaxlen, id=newId)
-        self.montantTextCtrl.Bind(wx.EVT_TEXT_URL,
-              self.OnMontantTextCtrlTextUrl, id=newId)
-        self.montantTextCtrl.Bind(wx.EVT_TEXT_ENTER,
-              self.OnMontantTextCtrlTextEnter, id=newId)
-        self.montantTextCtrl.Bind(wx.EVT_TEXT, self.OnMontantTextCtrlText,
+        self.amountTextCtrl.Bind(wx.EVT_TEXT_MAXLEN,
+              self.OnAmountTextCtrlTextMaxlen, id=newId)
+        self.amountTextCtrl.Bind(wx.EVT_TEXT_URL,
+              self.OnAmountTextCtrlTextUrl, id=newId)
+        self.amountTextCtrl.Bind(wx.EVT_TEXT_ENTER,
+              self.OnAmountTextCtrlTextEnter, id=newId)
+        self.amountTextCtrl.Bind(wx.EVT_TEXT, self.OnAmountTextCtrlText,
               id=newId)
 
     def OnBankCheckBoxCheckbox(self, event):
@@ -121,52 +121,52 @@ class Line (object) :
     def OnModeTextCtrlText(self, event):
         self.entry.mode = self.modeTextCtrl.GetValue()
 
-    def OnLibelleTextCtrlTextUrl(self, event):
-        print "OnLibelleTextCtrlTextUrl"
+    def OnLabelTextCtrlTextUrl(self, event):
+        print "OnLabelTextCtrlTextUrl"
 
-    def OnLibelleTextCtrlTextMaxlen(self, event):
-        print "OnLibelleTextCtrlTextMaxlen"
+    def OnLabelTextCtrlTextMaxlen(self, event):
+        print "OnLabelTextCtrlTextMaxlen"
 
-    def OnLibelleTextCtrlTextEnter(self, event):
-        print "OnLibelleTextCtrlTextEnter"
+    def OnLabelTextCtrlTextEnter(self, event):
+        print "OnLabelTextCtrlTextEnter"
 
-    def OnLibelleTextCtrlText(self, event):
-        self.entry.label = self.libelleTextCtrl.GetValue()
+    def OnLabelTextCtrlText(self, event):
+        self.entry.label = self.labelTextCtrl.GetValue()
 
-    def OnMontantTextCtrlTextMaxlen(self, event):
-        print "OnMontantTextCtrlTextMaxlen"
+    def OnAmountTextCtrlTextMaxlen(self, event):
+        print "OnAmountTextCtrlTextMaxlen"
 
-    def OnMontantTextCtrlTextUrl(self, event):
-        print "OnMontantTextCtrlTextUrl"
+    def OnAmountTextCtrlTextUrl(self, event):
+        print "OnAmountTextCtrlTextUrl"
 
-    def OnMontantTextCtrlTextEnter(self, event):
+    def OnAmountTextCtrlTextEnter(self, event):
         try:
-            self.entry.amount = decimal.Decimal(self.montantTextCtrl.GetValue())
+            self.entry.amount = decimal.Decimal(self.amountTextCtrl.GetValue())
         except:
-            self.montantTextCtrl.SetValue(str(self.entry.amount))
+            self.amountTextCtrl.SetValue(str(self.entry.amount))
 
-    def OnMontantTextCtrlText(self, event):
+    def OnAmountTextCtrlText(self, event):
         pass
 
     def bind_entry(self, e) :
         self.entry = e
         self.dateTextCtrl.SetValue(entry.dateToString(e.date))
         self.modeTextCtrl.SetValue(e.mode)
-        self.libelleTextCtrl.SetValue(e.label)
+        self.labelTextCtrl.SetValue(e.label)
         self.bankCheckBox.SetValue(e.bank)
-        self.montantTextCtrl.SetValue(str(e.amount))
+        self.amountTextCtrl.SetValue(str(e.amount))
 
     def destroy(self) :
         self.dateTextCtrl.Destroy()
         self.dateTextCtrl = None
         self.modeTextCtrl.Destroy()
         self.modeTextCtrl = None
-        self.libelleTextCtrl.Destroy()
-        self.libelleTextCtrl = None
+        self.labelTextCtrl.Destroy()
+        self.labelTextCtrl = None
         self.bankCheckBox.Destroy()
         self.bankCheckBox = None
-        self.montantTextCtrl.Destroy()
-        self.montantTextCtrl = None
+        self.amountTextCtrl.Destroy()
+        self.amountTextCtrl = None
 
 class LineSelect (Line) :
     def __init__(self, par, e, offset = 0) :
