@@ -21,7 +21,8 @@ class Line (object) :
         newId = wx.NewId()
         self.dateTextCtrl = wx.TextCtrl(id=newId,
               name=u'dateTextCtrl', parent=par, pos=wx.Point(0,
-              32+offset), size=wx.Size(99, 19), style=0, value=str(entry.dateToString(e.date)))
+              32+offset), size=wx.Size(99, 19), style=wx.TE_PROCESS_ENTER,
+              value=str(entry.dateToString(e.date)))
         self.dateTextCtrl.Bind(wx.EVT_TEXT_MAXLEN,
               self.OnDateTextCtrlTextMaxlen, id=newId)
         self.dateTextCtrl.Bind(wx.EVT_TEXT_URL, self.OnDateTextCtrlTextUrl,
@@ -73,7 +74,8 @@ class Line (object) :
         newId = wx.NewId()
         self.montantTextCtrl = wx.TextCtrl(id=newId,
               name=u'montantTextCtrl', parent=par,
-              pos=wx.Point(1100, 32+offset), size=wx.Size(149, 19), style=wx.TE_RIGHT,
+              pos=wx.Point(1100, 32+offset), size=wx.Size(149, 19),
+              style=wx.TE_RIGHT|wx.TE_PROCESS_ENTER,
               value=str(e.amount))
 
         self.montantTextCtrl.Bind(wx.EVT_TEXT_MAXLEN,
@@ -98,11 +100,14 @@ class Line (object) :
         print "OnDateTextCtrlTextUrl"
 
     def OnDateTextCtrlTextEnter(self, event):
-        print "OnDateTextCtrlTextEnter"
+        newDate = self.dateTextCtrl.GetValue()
+        try:
+            self.entry.date = entry.stringToDate(newDate)
+        except:
+            self.dateTextCtrl.SetValue(entry.dateToString(self.entry.date))
 
     def OnDateTextCtrlText(self, event):
-        newDate = self.dateTextCtrl.GetValue()
-        self.entry.date = entry.stringToDate(newDate)
+        pass
 
     def OnModeTextCtrlTextMaxlen(self, event):
         print "OnModeTextCtrlTextMaxlen"
@@ -135,10 +140,13 @@ class Line (object) :
         print "OnMontantTextCtrlTextUrl"
 
     def OnMontantTextCtrlTextEnter(self, event):
-        print "OnMontantTextCtrlTextEnter"
+        try:
+            self.entry.amount = decimal.Decimal(self.montantTextCtrl.GetValue())
+        except:
+            self.montantTextCtrl.SetValue(str(self.entry.amount))
 
     def OnMontantTextCtrlText(self, event):
-        self.entry.amount = decimal.Decimal(self.montantTextCtrl.GetValue())
+        pass
 
     def bind_entry(self, e) :
         self.entry = e
