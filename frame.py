@@ -209,6 +209,7 @@ class Frame(wx.Frame):
         """
         Call back to add a line in the book
         """
+        (x,y) = self.scrolledWindow.CalcScrolledPosition(0,0)
         self.scrolledWindow.Scroll(0,0)
         a = self.account
         newEntry = self.addLine.entry.copy()
@@ -218,8 +219,13 @@ class Frame(wx.Frame):
                                                         +100))
         # Create a new line
         offset = yOffset*(len(a.entries)-1)
-        self.lines.append(LineSelect(self.scrolledWindow, newEntry, offset))
-
+        try:
+            self.lines.append(LineSelect(self.scrolledWindow, newEntry, offset))
+        except:
+            pass
+        finally:
+            self.scrolledWindow.Scroll(-x,-y)
+            
     def OnDeleteButton(self, event):
         """
         Call back for delete button: remove selected lines
