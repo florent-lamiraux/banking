@@ -211,7 +211,7 @@
 10/ 7/2010	CB Aurélie	Parallèle	-126	False
 10/ 7/2010	CB Aurélie	Elysées Parfum	-139	False
 12/ 7/2010	e-CB	Résevation Hôtel Akihabara	-500.00	False
-13/ 7/2010	CB Florent	Billet de train Toulouse Rodez	-23.90	False
+13/ 7/2010	CB Florent	Billet de train Toulouse Rodez	-23.50	False
 13/ 7/2010	CB Aurélie	Pharmacie Monestier	-174.52	False
 15/ 7/2010	CB Aurélie	Maison du Livre	-44.80	False
 15/ 7/2010	CB Aurélie	Le Commerce	-23.50	False
@@ -246,17 +246,27 @@
 29/ 7/2010	CHQ9980801	Examen Aurélie	-69.00	False
 29/ 7/2010	CHQ9980802	Examen Aurélie	-213.71	False
 29/ 7/2010	CHQ9980803	Assurance Appartement (AVIVA)	-187.00	False
+29/ 7/2010	Virement	Salaire CNRS	3135.93	False
 30/ 7/2010	Prél. Autom.	Charges copropriété	-161.56	False
 30/ 7/2010	CHQ9980804	Docteur Noel	-60.00	False
 30/ 7/2010	CHQ9980805	Docteur Sivade	-25.00	False
 30/ 7/2010	CB Aurélie	Pharmacie du Busca	-15.85	False
+30/ 7/2010	CB Aurélie	Pharmacie le Floréal	-13.65	False
 31/ 7/2010	CB Florent	Retrait Crédit Lyonnais Toulouse Alsace Lorraine	-500.00	False
 31/ 7/2010	CB Florent	Midica	-63.50	False
 31/ 7/2010	Prél. Autom.	Gaz de France	-23.51	False
+ 2/ 8/2010	CHQ9980806	Docteur Marenc	-44.00	False
+ 3/ 8/2010	CB Florent	Billet de train Toulouse Rodez	-23.50	False
+ 3/ 8/2010	CB Aurélie	Marie-Rose Perie Marcillac (vêtements)	-161.92	False
+ 3/ 8/2010	CHQ9980807	Coiffeur enfant Marcillac	-12.00	False
+ 4/ 8/2010	CHQ9980808	Vêtements enfant Marcillac	-191.59	False
+ 4/ 8/2010	CHQ9980809	Vêtements enfant Marcillac	-191.59	False
+ 4/ 8/2010	CHQ9980810	Révision Automobile	-191.95	False
 10/ 8/2010	Prél. Autom.	Handicap International	-20.00	False
 10/ 8/2010	Prél. Autom.	Electricité	-51.46	False
 30/ 8/2010	Prél. Autom.	Charges copropriété	-161.56	False
 10/ 9/2010	Prél. Autom.	Handicap International	-20.00	False
 30/ 9/2010	Prél. Autom.	Charges copropriété	-161.56	False
+ 5/ 8/2010	Virement	CAF Aurélie	834.82	False
 
-			balance: -204.57	bank: 3789.77
+			balance: 2936.38	bank: 3789.77
