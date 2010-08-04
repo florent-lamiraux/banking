@@ -3,7 +3,7 @@
 import re
 from entry import *
 import codecs
-
+import datetime as dt
 
 def bankOrder(e1, e2):
     """
@@ -45,14 +45,15 @@ class Account (object) :
         e = Entry(date, mode, label, amount)
         self.entries.append(e)
 
-    @property
-    def balance(self):
+    def balance(self, date = dt.date.max):
         """
-        Compute the balance by adding values of each entry
+        Compute the balance by adding values of each entry before a given date.
         """
-        return reduce (lambda x,y: x+y,
-                       map(lambda e : e.amount, self.entries),
-                       0)
+        total = 0
+        for e in self.entries:
+            if e.date <= date:
+                total += e.amount
+        return total
 
     @property
     def bank_balance(self) :
