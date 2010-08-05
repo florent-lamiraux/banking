@@ -7,9 +7,10 @@ import entry
  wxID_FRAMELABELSTATICTEXT, wxID_FRAMEMODESTATICTEXT,
  wxID_FRAMEAMOUNTSTATICTEXT, wxID_FRAMEUPPERPANEL,
  wxID_FRAMESCROLLEDWINDOW, wxID_FRAMETOTALBANKTEXTCTRL, wxID_FRAMELOWERPANEL,
+ wxID_FRAMEBALANCEDATEBUTTON, wxID_FRAMEBALANCEDATETEXTCTRL,
  wxID_FRAMETOTALBANQUESTATICTEXT, wxID_FRAMETOTALSTATICTEXT,
  wxID_FRAMETOTALTEXTCTRL,
-] = [wx.NewId() for _init_ctrls in range(13)]
+] = [wx.NewId() for _init_ctrls in range(15)]
 
 class Line (object) :
     """
@@ -186,6 +187,12 @@ class LastLine (object) :
     Last line of the book with balance and bank balance
     """
     def __init__(self, prnt, total, totalBank, offset = 0):
+        self.parent = prnt
+        self.balanceDateButton = wx.Button(id=wxID_FRAMEBALANCEDATEBUTTON,
+              label=u'Date', name=u'balanceDateButton',
+              parent=prnt, pos=wx.Point(600, 59+offset),
+              size=wx.Size(99, 25), style=0)
+
         self.totalBanqueStaticText = wx.StaticText(id=wxID_FRAMETOTALBANQUESTATICTEXT,
               label=u'Total banque', name=u'totalBanqueStaticText',
               parent=prnt, pos=wx.Point(900, 82+offset),
@@ -201,20 +208,48 @@ class LastLine (object) :
               pos=wx.Point(1100, 62+offset), size=wx.Size(149, 19), style=wx.TE_RIGHT,
               value=str(total))
 
+        self.balanceDateTextCtrl = wx.TextCtrl(id=wxID_FRAMEBALANCEDATETEXTCTRL,
+              name=u'balanceDateTextCtrl', parent=prnt,
+              pos=wx.Point(700, 62+offset), size=wx.Size(99, 19),
+              style=wx.TE_PROCESS_ENTER, value="")
+
         self.totalBankTextCtrl = wx.TextCtrl(id=wxID_FRAMETOTALBANKTEXTCTRL,
               name=u'totalBankTextCtrl', parent=prnt,
               pos=wx.Point(1100, 82+offset), size=wx.Size(149, 19), style=wx.TE_RIGHT,
               value=str(totalBank))
+
+        self.balanceDateTextCtrl.Bind(wx.EVT_TEXT_ENTER,
+                                      self.OnBalanceDateTextCtrlTextEnter,
+                                      id=wxID_FRAMEBALANCEDATETEXTCTRL)
+
+        self.balanceDateButton.Bind(wx.EVT_BUTTON, self.OnBalanceDateButton,
+                                    id=wxID_FRAMEBALANCEDATEBUTTON)
+
+    def OnBalanceDateTextCtrlTextEnter(self, event):
+        newDate = self.balanceDateTextCtrl.GetValue()
+        try:
+            self.parent.balanceDate = entry.stringToDate(newDate)
+        except:
+            self.balanceDateTextCtrl.SetValue(entry.dateToString(self.parent.balanceDate))
+
+    def OnBalanceDateButton(self, event):
+        self.balanceDateTextCtrl.SetValue(entry.dateToString(dt.date.today()))
+        self.OnBalanceDateTextCtrlTextEnter(wx.EVT_TEXT_ENTER)
+
 
     def set_values(self, total, totalBank) :
         self.totalTextCtrl.SetValue(str(total))
         self.totalBankTextCtrl.SetValue(str(totalBank))
 
     def destroy(self):
+        self.balanceDateButton.Destroy()
+        self.balanceDateButton = None
         self.totalBanqueStaticText.Destroy()
         self.totalBanqueStaticText = None
         self.totalStaticText.Destroy()
         self.totalStaticText = None
+        self.balanceDateTextCtrl.Destroy()
+        self.balanceDateTextCtrl = None
         self.totalTextCtrl.Destroy()
         self.totalTextCtrl = None
         self.totalBankTextCtrl.Destroy()

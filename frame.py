@@ -3,6 +3,8 @@
 import wx
 import account
 from line import *
+import datetime as dt
+
 yOffset = 20
 
 def create(parent):
@@ -109,6 +111,7 @@ class Frame(wx.Frame):
               size=wx.Size(800, 20), style=wx.ALIGN_CENTRE)
 
         # Last line
+        self.lowerPanel.balanceDate = dt.date.max
         self.lastLine = LastLine(self.lowerPanel, total = 0,
                                  totalBank = 0,
                                  offset = 0)
@@ -225,7 +228,7 @@ class Frame(wx.Frame):
             pass
         finally:
             self.scrolledWindow.Scroll(-x,-y)
-            
+
     def OnDeleteButton(self, event):
         """
         Call back for delete button: remove selected lines
@@ -249,16 +252,22 @@ class Frame(wx.Frame):
         for e, l in zip(a.entries, self.lines) :
             l.bind_entry(e)
             l.selectCheckBox.SetValue(False)
+        # Get date of balance
+        date = self.lowerPanel.balanceDate
         # recompute total
-        self.lastLine.set_values(total = a.balance, totalBank = a.bank_balance)
+        self.lastLine.set_values(total = a.balance(date),
+                                 totalBank = a.bank_balance)
 
     def OnBankOrderButton(self, event):
         a = self.account
         a.sort(account.bankOrder)
         for e, l in zip(a.entries, self.lines) :
             l.bind_entry(e)
+        # Get date of balance
+        date = self.lowerPanel.balanceDate
         # recompute total
-        self.lastLine.set_values(total = a.balance, totalBank = a.bank_balance)
+        self.lastLine.set_values(total = a.balance(date),
+                                 totalBank = a.bank_balance)
 
     def deleteLastLines(self, n):
         """
@@ -289,7 +298,10 @@ class Frame(wx.Frame):
         self.scrolledWindow.SetVirtualSize(size=wx.Size(1280,
                                                         yOffset*len(a.entries)
                                                         +100))
+        # Get date of balance
+        date = self.lowerPanel.balanceDate
         # recompute total
-        self.lastLine.set_values(total = a.balance, totalBank = a.bank_balance)
+        self.lastLine.set_values(total = a.balance(date),
+                                 totalBank = a.bank_balance)
 
         self.Refresh()

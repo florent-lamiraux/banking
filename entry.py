@@ -43,6 +43,8 @@ class Entry (object) :
         f.write("\t"+str(self.bank))
 
 def stringToDate(dateStr) :
+    if dateStr == "":
+        return dt.date.max
     d = re.split("/", dateStr)
     if len(d) is not 3:
         raise RuntimeError("La date s'écrit jj/mm/aaaa.")
@@ -54,4 +56,7 @@ def stringToDate(dateStr) :
     return dt.date(a, m, j)
 
 def dateToString(date) :
-    return ("%2i"%date.day+"/"+"%2i"%date.month+"/"+"%4i"%date.year)
+    if date == dt.date.max:
+        return ""
+    else:
+        return ("%2i"%date.day+"/"+"%2i"%date.month+"/"+"%4i"%date.year)
