@@ -103,6 +103,24 @@ class Account (object) :
             f.write( 3*"\t"+"balance: "+str(self.balance))
             f.write( "\t"+"bank: "+str(self.bank_balance))
 
+    def search(self, expr, entries, field = 'label') :
+        """
+        Return the list of entries the field of which contains an expression.
+        """
+        # If expr is lower case, search is case insensitive
+        if expr.lower() == expr:
+            def lower(s):
+                return s.lower()
+        else:
+            def lower(s) :
+                return s
+
+        result = []
+        for e in entries:
+            if re.search(expr, lower(e.__dict__[field])):
+                result.append(e)
+        return result
+
     def sort (self, comp = lambda x,y: cmp(x.date,y.date)) :
         """
         Sort entries by increasing dates
