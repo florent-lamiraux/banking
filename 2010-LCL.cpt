@@ -72,7 +72,7 @@
 13/ 4/2010	CB Aurélie	Petit Casino	-24.49	True
 15/ 4/2010	Prél. Autom.	Ecole La Prairie	-474.00	True
 15/ 4/2010	Prél. Autom.	Trésor Public	-21.00	True
-16/ 4/2010	Prél. Autom.	Abonnement France-Télécom	-80.45	True
+16/ 4/2010	Prél. Autom.	France Télécom	-80.45	True
 16/ 4/2010	CB Aurélie	Ecomarché Verfeil	-77.89	True
 17/ 4/2010	CB Florent	Retrait Crédit Lyonnais Lavaur	-500.00	True
 18/ 4/2010	TIP	Abonnement Internet Orange	-68.10	True
@@ -131,7 +131,7 @@
 22/ 5/2010	CHQ9980867	Médecin Aurélie	-48.50	True
 22/ 5/2010	CB Aurélie	Carburant Shell Toulouse	-48.73	True
 22/ 5/2010	CB Aurélie	Pharmacie Daurie Caraman	-41.93	True
-23/ 5/2010	CB Florent	Ticket Tisséo (20)	-23.40	True
+23/ 5/2010	CB Florent	Tisséo (20 tickets)	-23.40	True
 24/ 5/2010	Virement	Compte CASDEN	-4000.00	True
 25/ 5/2010	CB Aurélie	Retrait Crédit Lyonnais Alsace Lorraine	-500.00	True
 25/ 5/2010	CB Aurélie	Elysées Parfum	-79.00	True
@@ -182,7 +182,7 @@
 18/ 6/2010	CB Aurélie	Chronodrive.com	-7.89	False
 18/ 6/2010	CB Aurélie	Chronodrive.com	-84.41	False
 21/ 6/2010	e-CB	Apple Store (Mac Book)	-1044.00	False
-22/ 6/2010	CB Aurélie	Tisséo Régie	-35.10	False
+22/ 6/2010	CB Aurélie	Tisséo (30 tickets)	-35.10	False
 22/ 6/2010	CB Aurélie	Maille Souple	-77.60	False
 22/ 6/2010	CB Aurélie	Jacadi	-89.00	False
 22/ 6/2010	CB Aurélie	Petit Casino	-15.82	False
@@ -197,14 +197,17 @@
 30/ 6/2010	CB Aurélie	Boucherie	-36.00	False
 30/ 6/2010	CB Aurélie	Maison Pillon	-38.60	False
 30/ 6/2010	CB Aurélie	Bistro J'GO	-49.00	False
- 1/ 7/2010	CB Aurélie	Ticket Tissée (10)	-12.50	False
+ 1/ 7/2010	CB Aurélie	Tisséo (10 tickets)	-12.50	False
  1/ 7/2010	CB Aurélie	La grande récré	-109.29	False
  2/ 7/2010	CB Aurélie	Chronodrive.com	-129.73	False
+ 2/ 7/2010	Virement	Remboursement MGEN	45.70	False
+ 2/ 7/2010	Virement	Remboursement MGEN	66.89	False
  4/ 7/2010	CB Florent	Retrait Crédit Lyonnais Rangueil	-500.00	False
  5/ 7/2010	Virement	CAF Aurélie	834.82	False
  5/ 7/2010	Virement	Remboursement mission Poitiers	178.20	False
  7/ 7/2010	CHQ9980798	Electricien	-450.27	False
  9/ 7/2010	CB Florent	Chronodrive.com	-83.62	False
+ 9/ 7/2010	Virement	Remboursement MGEN	24.52	False
 10/ 7/2010	TIP	Abonnement Internet Orange	-47.70	False
 10/ 7/2010	Prél. Autom.	Handicap International	-20.00	False
 10/ 7/2010	CHQ9980799	Remboursement Claudie	-300	False
@@ -229,6 +232,8 @@
 20/ 7/2010	CB Florent	Carburant	-52.19	False
 20/ 7/2010	CB Florent	Ravitaillement autoroute	-15.20	False
 20/ 7/2010	CB Florent	Péage Autoroute SANEF	-35.00	False
+22/ 7/2010	Virement	Remboursement MGEN	14.40	False
+22/ 7/2010	Virement	Remboursement MGEN	26.78	False
 23/ 7/2010	CB Florent	Jouets Nigloland	-4.00	False
 23/ 7/2010	CB Aurélie	Boutique Nigloland	-15.60	False
 26/ 7/2010	CB Florent	Carburant	-38.39	False
@@ -256,17 +261,77 @@
 31/ 7/2010	CB Florent	Midica	-63.50	False
 31/ 7/2010	Prél. Autom.	Gaz de France	-23.51	False
  2/ 8/2010	CHQ9980806	Docteur Marenc	-44.00	False
+ 2/ 8/2010	Virement	Remboursement MGEN	21.00	False
+ 2/ 8/2010	Virement	Remboursement MGEN	25.00	False
  3/ 8/2010	CB Florent	Billet de train Toulouse Rodez	-23.50	False
  3/ 8/2010	CB Aurélie	Marie-Rose Perie Marcillac (vêtements)	-161.92	False
  3/ 8/2010	CHQ9980807	Coiffeur enfant Marcillac	-12.00	False
  4/ 8/2010	CHQ9980808	Vêtements enfant Marcillac	-191.59	False
  4/ 8/2010	CHQ9980809	Vêtements enfant Marcillac	-191.59	False
  4/ 8/2010	CHQ9980810	Révision Automobile	-191.95	False
+ 5/ 8/2010	Virement	CAF Aurélie	834.82	False
+ 5/ 8/2010	CB Aurélie	Aymes chaussures Marcillac	-44.00	False
+ 5/ 8/2010	CB Aurélie	Aymes chaussures Marcillac	-29.00	False
+ 5/ 8/2010	CB Florent	Garage Perget Marcillac	-11.06	False
+ 5/ 8/2010	CB Florent	Carburant	-60.60	False
+ 7/ 8/2010	CB Aurélie	Mac Donald	-28.65	False
+ 7/ 8/2010	CB Aurélie	Chaussures Victor	-86.50	False
+ 7/ 8/2010	CB Aurélie	Chronodrive.com	-84.06	False
+ 7/ 8/2010	Virement	Mensualité prêt	-701.31	False
+ 8/ 8/2010	CB Aurélie	Museum d'Histoire Naturelle	-34.45	False
 10/ 8/2010	Prél. Autom.	Handicap International	-20.00	False
 10/ 8/2010	Prél. Autom.	Electricité	-51.46	False
+10/ 8/2010	TIP	Abonnement Internet Orange	-36.20	False
+10/ 8/2010	CB Aurélie	Boucherie Marcillac	-35.79	False
+11/ 8/2010	CB Aurélie	Mac Donald	-29.60	False
+13/ 8/2010	Virement	Remboursement impôts sur le revenu	147.00	False
+14/ 8/2010	Prél. Autom.	France Télécom	-40.15	False
+15/ 8/2010	CB Aurélie	Alimentation Intermarché Marcillac	-12.01	False
+16/ 8/2010	CB Florent	Billet de train Rodez Toulouse	-23.50	False
+16/ 8/2010	CB Florent	Tisséo (10 tickets)	-25.00	False
+17/ 8/2010	CB Aurélie	Patisserie Marcillac	-34.18	False
+17/ 8/2010	CB Aurélie	SNC Phie Monestier Marcillac	-15.45	False
+17/ 8/2010	CB Aurélie	Maison de la presse Marcillac	-32.38	False
+18/ 8/2010	e-CB	Office Dépot	-35.44	False
+18/ 8/2010	CB Aurélie	Chronodrive.com	-74.67	False
+18/ 8/2010	Virement	Remboursement impôts sur le revenu	52.00	False
+21/ 8/2010	CB Aurélie	Flunch	-29.00	False
+21/ 8/2010	CB Aurélie	Okaidi Portet sur Garonne	-84.33	False
+22/ 8/2010	CB Florent	Restaurant Cité de l'Espace	-56.40	False
+22/ 8/2010	CB Aurélie	Entrées Cité de l'Espace	-37.80	False
+22/ 8/2010	CB Aurélie	Boutique Cité de l'Espace	-44.00	False
+23/ 8/2010	CB Aurélie	Chronodrive.com	-9.43	False
+23/ 8/2010	CB Aurélie	Chronodrive.com	-72.35	False
+23/ 8/2010	CB Aurélie	La Poste Bourg Saint Bernard	-13.60	False
+23/ 8/2010	CB Aurélie	Carburant Ecomarché Verfeil	-56.11	False
+24/ 8/2010	CHQ9980811	SNCF	-19.00	False
+26/ 8/2010	CB Florent	Pharmacie du Floréal	-35.90	False
+26/ 8/2010	CB Florent	Retrait Crédit Agricole Toulouse Bedouce	-200.00	False
+27/ 8/2010	CHQ9980812	Taxe foncière maison	-478.45	False
+28/ 8/2010	CB Florent	Mac Donald Saint Orens	-28.70	False
+28/ 8/2010	CB Florent	Virgin Toulouse	-11.98	False
+28/ 8/2010	CB Florent	Brasserie les Arcades	-45.90	False
+28/ 8/2010	Virement	Salaire CNRS	3135.93	False
+28/ 8/2010	CHQ9980813	Acompte cuisine Schmidt	-2100.00	False
+28/ 8/2010	CB Aurélie	Saint Maclou	-8.90	False
 30/ 8/2010	Prél. Autom.	Charges copropriété	-161.56	False
+30/ 8/2010	CB Aurélie	Boucherie	-20.00	False
+30/ 8/2010	CB Aurélie	Pharmacie du Floréal	-19.07	False
+30/ 8/2010	CB Aurélie	Petit Casino	-11.00	False
+30/ 8/2010	CHQ9980814	Anesthésiste	-28.00	False
+31/ 8/2010	CHQ9980815	Bescos	-950.00	False
+ 1/ 9/2010	CB Aurélie	Carrefour Market	-77.76	False
+ 2/ 9/2010	CHQ9980816	Assurance maison	-108.52	False
+ 3/ 9/2010	CB Florent	Restaurant Carcassonne	-52.00	False
+ 3/ 9/2010	CB Florent	Autoroute Carcassonne-Toulouse	-6.60	False
+ 3/ 9/2010	CB Aurélie	Marché Plus Carcassonne	-16.30	False
+ 3/ 9/2010	remise chèque	Vente appartement	982.32	False
+ 4/ 9/2010	CB Florent	Leroy Merlin	-99.05	False
+ 4/ 9/2010	CHQ9980817	Prise de sang Aurélie	-27.00	False
+ 4/ 9/2010	CB Aurélie	Carburant	-62.84	False
+ 5/ 9/2010	Virement	CAF Aurélie	834.82	False
+ 5/ 9/2010	CB Aurélie	Retrait Crédit Agricole Toulouse Bedouce	-200.00	False
 10/ 9/2010	Prél. Autom.	Handicap International	-20.00	False
 30/ 9/2010	Prél. Autom.	Charges copropriété	-161.56	False
- 5/ 8/2010	Virement	CAF Aurélie	834.82	False
 
-			balance: 2936.38	bank: 3789.77
+			balance: <bound method Account.balance of <account.Account object at 0xb73fd02c>>	bank: 3789.77
