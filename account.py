@@ -100,7 +100,7 @@ class Account (object) :
                 f.write('\n')
 
             f.write( "\n")
-            f.write( 3*"\t"+"balance: "+str(self.balance))
+            f.write( 3*"\t"+"balance: "+str(self.balance()))
             f.write( "\t"+"bank: "+str(self.bank_balance))
 
     def search(self, expr, entries, field = 'label') :
