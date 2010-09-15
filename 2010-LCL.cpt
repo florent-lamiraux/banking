@@ -321,6 +321,7 @@
 30/ 8/2010	CHQ9980814	Anesthésiste	-28.00	False
 31/ 8/2010	CHQ9980815	Bescos	-950.00	False
  1/ 9/2010	CB Aurélie	Carrefour Market	-77.76	False
+ 1/ 9/2010	Prélèvement	LCL intéractif	-2.50	False
  2/ 9/2010	CHQ9980816	Assurance maison	-108.52	False
  3/ 9/2010	CB Florent	Restaurant Carcassonne	-52.00	False
  3/ 9/2010	CB Florent	Autoroute Carcassonne-Toulouse	-6.60	False
@@ -331,7 +332,9 @@
  4/ 9/2010	CB Aurélie	Carburant	-62.84	False
  5/ 9/2010	Virement	CAF Aurélie	834.82	False
  5/ 9/2010	CB Aurélie	Retrait Crédit Agricole Toulouse Bedouce	-200.00	False
+ 6/ 9/2010	CHQ9980818	Surgelés Picard	-50.15	False
+ 6/ 9/2010	CB Aurélie	Boucherie	-11.21	False
+ 6/ 9/2010	CB Aurélie	Chronodrive.com	-103.55	False
 10/ 9/2010	Prél. Autom.	Handicap International	-20.00	False
-30/ 9/2010	Prél. Autom.	Charges copropriété	-161.56	False
 
-			balance: <bound method Account.balance of <account.Account object at 0xb73fd02c>>	bank: 3789.77
+			balance: 1822.90	bank: 3789.77
