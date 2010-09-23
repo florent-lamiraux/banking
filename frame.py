@@ -6,6 +6,14 @@ from line import *
 import datetime as dt
 
 yOffset = 20
+#xTotalSize = 1300
+#yFrameSize = 1114
+#xWindowSize = 1280
+#yWindowSize = 850
+xTotalSize = 1200
+yFrameSize = 664
+xWindowSize = 1180
+yWindowSize = 450
 
 def create(parent):
     return Frame(parent)
@@ -65,24 +73,24 @@ class Frame(wx.Frame):
 
         # generated method, don't edit
         wx.Frame.__init__(self, id=wxID_FRAME, name='', parent=prnt,
-              pos=wx.Point(0, 25), size=wx.Size(1300, 1114),
+              pos=wx.Point(0, 25), size=wx.Size(xTotalSize, yFrameSize),
               style=wx.DEFAULT_FRAME_STYLE, title=u'Comptes')
         self._init_utils()
-        self.SetClientSize(wx.Size(1300, 1114))
+        self.SetClientSize(wx.Size(xTotalSize, yFrameSize))
         self.SetMenuBar(self.menuBar1)
 
         self.upperPanel = wx.Panel(id=wxID_FRAMEUPPERPANEL,
                                    name=u'upper panel', parent=self,
-                                   pos=wx.Point(0,0), size=wx.Size(1280,25))
+                                   pos=wx.Point(0,0), size=wx.Size(xWindowSize,25))
         self.scrolledWindow = wx.ScrolledWindow(id=wxID_FRAMESCROLLEDWINDOW,
               name=u'scrolledWindow', parent=self, pos=wx.Point(0, 25),
-              size=wx.Size(1300, 850), style=wx.HSCROLL | wx.VSCROLL)
-        self.scrolledWindow.SetVirtualSize(size=wx.Size(1280, 300))
+              size=wx.Size(xTotalSize, yWindowSize), style=wx.HSCROLL | wx.VSCROLL)
+        self.scrolledWindow.SetVirtualSize(size=wx.Size(xWindowSize, 300))
         self.scrolledWindow.SetScrollRate(10,10)
 
         self.lowerPanel = wx.Panel(id=wxID_FRAMELOWERPANEL,
                                    name=u'lower panel', parent=self,
-                                   pos=wx.Point(0,850), size=wx.Size(1280,225))
+                                   pos=wx.Point(0,yWindowSize), size=wx.Size(xWindowSize,225))
 
         self.dateStaticText = wx.StaticText(id=wxID_FRAMEDATESTATICTEXT,
               label=u'Date', name=u'dateStaticText', parent=self.upperPanel,
@@ -96,19 +104,19 @@ class Frame(wx.Frame):
 
         self.amountStaticText = wx.StaticText(id=wxID_FRAMEAMOUNTSTATICTEXT,
               label=u'Montant', name=u'amountStaticText',
-              parent=self.upperPanel, pos=wx.Point(1100, 8),
+              parent=self.upperPanel, pos=wx.Point(xLabelSize+300, 8),
               size=wx.Size(150, 20), style=wx.ALIGN_CENTRE)
 
         self.bankStaticText = wx.StaticText(id=wxID_FRAMEBANKSTATICTEXT,
               label=u'Banque', name=u'bankStaticText',
-              parent=self.upperPanel, pos=wx.Point(1030, 8),
+              parent=self.upperPanel, pos=wx.Point(xLabelSize+230, 8),
               size=wx.Size(70, 20), style=wx.ALIGN_CENTRE)
         self.bankStaticText.SetHelpText(u'Cette entr\xe9e est-elle prise en compte par la banque ?')
 
         self.labelStaticText = wx.StaticText(id=wxID_FRAMELABELSTATICTEXT,
               label=u'Libell\xe9', name=u'labelStaticText',
               parent=self.upperPanel, pos=wx.Point(230, 8),
-              size=wx.Size(800, 20), style=wx.ALIGN_CENTRE)
+              size=wx.Size(xLabelSize, 20), style=wx.ALIGN_CENTRE)
 
         # Last line
         self.lowerPanel.balanceDate = dt.date.max
@@ -217,7 +225,7 @@ class Frame(wx.Frame):
         a = self.account
         newEntry = self.addLine.entry.copy()
         a.entries.append(newEntry)
-        self.scrolledWindow.SetVirtualSize(size=wx.Size(1280,
+        self.scrolledWindow.SetVirtualSize(size=wx.Size(xWindowSize,
                                                         yOffset*len(a.entries)
                                                         +100))
         # Create a new line
@@ -295,7 +303,7 @@ class Frame(wx.Frame):
             offset += yOffset
 
         # Resize the window
-        self.scrolledWindow.SetVirtualSize(size=wx.Size(1280,
+        self.scrolledWindow.SetVirtualSize(size=wx.Size(xWindowSize,
                                                         yOffset*len(a.entries)
                                                         +100))
         # Get date of balance
