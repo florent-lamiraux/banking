@@ -193,7 +193,7 @@ class LastLine (object) :
         self.parent = prnt
         self.balanceDateButton = wx.Button(id=wxID_FRAMEBALANCEDATEBUTTON,
               label=u'Date', name=u'balanceDateButton',
-              parent=prnt, pos=wx.Point(xLabelSize-200, 59+offset),
+              parent=prnt, pos=wx.Point(xLabelSize-150, 59+offset),
               size=wx.Size(99, 25), style=0)
 
         self.totalBanqueStaticText = wx.StaticText(id=wxID_FRAMETOTALBANQUESTATICTEXT,
@@ -213,7 +213,7 @@ class LastLine (object) :
 
         self.balanceDateTextCtrl = wx.TextCtrl(id=wxID_FRAMEBALANCEDATETEXTCTRL,
               name=u'balanceDateTextCtrl', parent=prnt,
-              pos=wx.Point(xLabelSize-100, 62+offset), size=wx.Size(99, 19),
+              pos=wx.Point(xLabelSize-50, 62+offset), size=wx.Size(99, 19),
               style=wx.TE_PROCESS_ENTER, value="")
 
         self.totalBankTextCtrl = wx.TextCtrl(id=wxID_FRAMETOTALBANKTEXTCTRL,
