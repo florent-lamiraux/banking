@@ -24,8 +24,8 @@ class Line (object) :
         self.frame = par
         newId = wx.NewId()
         self.dateTextCtrl = wx.TextCtrl(id=newId,
-              name=u'dateTextCtrl', parent=par, pos=wx.Point(0,
-              32+offset), size=wx.Size(99, 19), style=wx.TE_PROCESS_ENTER,
+              name=u'dateTextCtrl', parent=par, pos=wx.Point(3,
+              32+offset), size=wx.Size(96, 19), style=wx.TE_PROCESS_ENTER,
               value=str(entry.dateToString(e.date)))
         self.dateTextCtrl.Bind(wx.EVT_TEXT_MAXLEN,
               self.OnDateTextCtrlTextMaxlen, id=newId)

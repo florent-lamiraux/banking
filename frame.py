@@ -94,7 +94,7 @@ class Frame(wx.Frame):
 
         self.dateStaticText = wx.StaticText(id=wxID_FRAMEDATESTATICTEXT,
               label=u'Date', name=u'dateStaticText', parent=self.upperPanel,
-              pos=wx.Point(0, 8), size=wx.Size(100, 20), style=wx.ALIGN_CENTRE)
+              pos=wx.Point(1, 8), size=wx.Size(100, 20), style=wx.ALIGN_CENTRE)
         self.dateStaticText.SetBackgroundColour(wx.Colour(4, 0, 0))
 
         self.modeStaticText = wx.StaticText(id=wxID_FRAMEMODESTATICTEXT,
@@ -131,7 +131,7 @@ class Frame(wx.Frame):
         # Add button
         self.addButton = wx.Button(id=wxID_FRAMEADD, label=u'Ajouter',
                                    name=u'add', parent=self.lowerPanel,
-                                   pos=wx.Point(0, 150),
+                                   pos=wx.Point(1, 150),
                                    size=wx.Size(85, 29), style=0)
         self.addButton.Bind(wx.EVT_BUTTON, self.OnAddButton, id=wxID_FRAMEADD)
 
