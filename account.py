@@ -19,20 +19,7 @@ def bankOrder(e1, e2):
     if e1.bank and not e2.bank:
         return -1
 
-    # if both entries are not on previous statement, sort by mode then by date
-    # First add cheques in modeOrder map
-    m1 = e1.mode
-    m2 = e2.mode
-    for m in (m1, m2):
-        if not m in modeOrder :
-            if m[:3] == 'CHQ':
-                modeOrder[m] = 2
-            else :
-                modeOrder[m] = 3
-
-    if modeOrder[m1] != modeOrder[m2]:
-        return cmp(modeOrder[m1], modeOrder[m2])
-
+    # if both entries are not on previous statement, sort by date
     # Sort by date
     return cmp(e1.date, e2.date)
 
