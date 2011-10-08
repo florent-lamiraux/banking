@@ -6,14 +6,15 @@ from line import *
 import datetime as dt
 
 yOffset = 20
-#xTotalSize = 1300
-#yFrameSize = 1114
-#xWindowSize = 1280
-#yWindowSize = 850
-xTotalSize = 1200
-yFrameSize = 664
-xWindowSize = 1180
-yWindowSize = 450
+
+xTotalSize = 1300
+yFrameSize = 1114
+xWindowSize = 1280
+yWindowSize = 850
+# xTotalSize = 1200
+# yFrameSize = 664
+# xWindowSize = 1180
+# yWindowSize = 450
 
 def create(parent):
     return Frame(parent)
