@@ -62,7 +62,7 @@ class Account (object) :
             line = f.readline()
             ln += 1
             while line != "\n" :
-                splittedLine = re.split("[\t]", line)
+                splittedLine = re.split("[,]", line)
                 if len(splittedLine) != 5:
                     raise RuntimeError ("line %i is invalid."%ln)
                 date = splittedLine[0]

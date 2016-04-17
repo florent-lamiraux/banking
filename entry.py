@@ -29,18 +29,18 @@ class Entry (object) :
 
     def __str__(self):
         output = dateToString(self.date)
-        output +="\t"+self.mode
-        output +="\t"+self.label
-        output +="\t"+str(self.amount)
-        output +="\t"+str(self.bank)
+        output +=","+self.mode
+        output +=","+self.label
+        output +=","+str(self.amount)
+        output +=","+str(self.bank)
         return output
 
     def save(self, f):
         f.write(dateToString(self.date))
-        f.write("\t"+self.mode)
-        f.write("\t"+self.label)
-        f.write("\t"+str(self.amount))
-        f.write("\t"+str(self.bank))
+        f.write(","+self.mode)
+        f.write(","+self.label)
+        f.write(","+str(self.amount))
+        f.write(","+str(self.bank))
 
 def stringToDate(dateStr) :
     if dateStr == "":
