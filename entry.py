@@ -12,7 +12,10 @@ class Entry (object) :
     """
     def __init__(self, date, mode, label, amount):
 
-        self.date = stringToDate(date)
+        if type (date) is dt.date:
+            self.date = date
+        else:
+            self.date = stringToDate(date)
         self.mode = mode
         self.label = label
         self.amount = decimal.Decimal(amount)
