@@ -1,0 +1,2 @@
+FILE_PATTERN    = *.py
+INPUT           = @CMAKE_SOURCE_DIR@
