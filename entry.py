@@ -31,7 +31,8 @@ class Entry (object) :
         return e
 
     def __str__(self):
-        output = dateToString(self.date)
+        output = u""
+        output += dateToString(self.date)
         output +=","+self.mode
         output +=","+self.label
         output +=","+str(self.amount)

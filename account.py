@@ -115,7 +115,7 @@ class Account (object) :
         self.entries.sort(comp)
 
     def __str__(self) :
-        output = ""
+        output = u""
         for e in self.entries :
             output += str(e) +"\n"
 
