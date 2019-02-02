@@ -5,12 +5,13 @@ import account
 from line import *
 import datetime as dt
 
-yOffset = 20
+yOffset = yLineSize + 1
+yBottomButtons = 150
 
 xTotalSize = 1300
-yFrameSize = 1114
+yFrameSize = 1000
 xWindowSize = 1280
-yWindowSize = 850
+yWindowSize = yFrameSize - 254
 # xTotalSize = 1200
 # yFrameSize = 664
 # xWindowSize = 1180
@@ -127,19 +128,19 @@ class Frame(wx.Frame):
 
         # Add line
         addEntry = entry.Entry(entry.dateToString(dt.date.today()), "", "", 0)
-        self.addLine = Line(self.lowerPanel, addEntry, 90)
+        self.addLine = Line(self.lowerPanel, addEntry, 60)
 
         # Add button
         self.addButton = wx.Button(id=wxID_FRAMEADD, label=u'Ajouter',
                                    name=u'add', parent=self.lowerPanel,
-                                   pos=wx.Point(1, 150),
+                                   pos=wx.Point(1, yBottomButtons),
                                    size=wx.Size(85, 29), style=0)
         self.addButton.Bind(wx.EVT_BUTTON, self.OnAddButton, id=wxID_FRAMEADD)
 
         # Delete button
         self.deleteButton = wx.Button(id=wxID_FRAMEDELETE, label=u'Supprimer',
                                       name=u'delete', parent=self.lowerPanel,
-                                      pos=wx.Point(100, 150),
+                                      pos=wx.Point(100, yBottomButtons),
                                       size=wx.Size(85, 29), style=0)
         self.deleteButton.Bind(wx.EVT_BUTTON, self.OnDeleteButton,
                                id=wxID_FRAMEDELETE)
@@ -149,7 +150,7 @@ class Frame(wx.Frame):
                                        label=u'Recalculer',
                                        name=u'refresh',
                                        parent=self.lowerPanel,
-                                       pos=wx.Point(200, 150),
+                                       pos=wx.Point(200, yBottomButtons),
                                        size=wx.Size(85, 29), style=0)
         self.refreshButton.Bind(wx.EVT_BUTTON, self.OnRefreshButton,
                                id=wxID_FRAMEREFRESH)
@@ -159,7 +160,7 @@ class Frame(wx.Frame):
                                        label=u'Ordre relev\xe9',
                                        name=u'bankOrder',
                                        parent=self.lowerPanel,
-                                       pos=wx.Point(295, 150),
+                                       pos=wx.Point(295, yBottomButtons),
                                        size=wx.Size(100, 29), style=0)
         self.bankOrderButton.Bind(wx.EVT_BUTTON, self.OnBankOrderButton,
                                   id=wxID_FRAMEBANKORDER)

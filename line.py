@@ -14,6 +14,8 @@ import entry
 
 #xLabelSize = 800
 xLabelSize = 700
+yLineSize = 28
+yLineSpacing = 45
 
 class Line (object) :
     """
@@ -25,7 +27,8 @@ class Line (object) :
         newId = wx.NewId()
         self.dateTextCtrl = wx.TextCtrl(id=newId,
               name=u'dateTextCtrl', parent=par, pos=wx.Point(3,
-              32+offset), size=wx.Size(96, 19), style=wx.TE_PROCESS_ENTER,
+              yLineSpacing+offset), size=wx.Size(96, yLineSize),
+              style=wx.TE_PROCESS_ENTER,
               value=str(entry.dateToString(e.date)))
         self.dateTextCtrl.Bind(wx.EVT_TEXT_MAXLEN,
               self.OnDateTextCtrlTextMaxlen, id=newId)
@@ -39,8 +42,8 @@ class Line (object) :
         newId = wx.NewId()
         self.modeTextCtrl = wx.TextCtrl(id=newId,
               name=u'modeTextCtrl', parent=par,
-              pos=wx.Point(100, 32+offset), size=wx.Size(129, 19), style=0,
-              value=e.mode)
+              pos=wx.Point(100, yLineSpacing+offset),
+              size=wx.Size(129, yLineSize), style=0, value=e.mode)
 
         self.modeTextCtrl.Bind(wx.EVT_TEXT_MAXLEN,
               self.OnModeTextCtrlTextMaxlen, id=newId)
@@ -54,7 +57,8 @@ class Line (object) :
         newId = wx.NewId()
         self.labelTextCtrl = wx.TextCtrl(id=newId,
               name=u'labelTextCtrl', parent=par,
-              pos=wx.Point(230, 32+offset), size=wx.Size(xLabelSize-1, 19), style=0,
+              pos=wx.Point(230, yLineSpacing+offset),
+              size=wx.Size(xLabelSize-1, yLineSize), style=0,
               value=e.label)
         self.labelTextCtrl.Bind(wx.EVT_TEXT_URL,
               self.OnLabelTextCtrlTextUrl, id=newId)
@@ -68,7 +72,8 @@ class Line (object) :
         newId = wx.NewId()
         self.bankCheckBox = wx.CheckBox(id=newId, label=u'',
               name=u'bankCheckBox', parent=par,
-              pos=wx.Point(xLabelSize+248, 32+offset), size=wx.Size(19, 19), style=0)
+              pos=wx.Point(xLabelSize+248, yLineSpacing+offset),
+              size=wx.Size(yLineSize, yLineSize), style=0)
         self.bankCheckBox.SetValue(e.bank)
         self.bankCheckBox.Bind(wx.EVT_CHECKBOX, self.OnBankCheckBoxCheckbox,
               id=newId)
@@ -78,7 +83,8 @@ class Line (object) :
         newId = wx.NewId()
         self.amountTextCtrl = wx.TextCtrl(id=newId,
               name=u'amountTextCtrl', parent=par,
-              pos=wx.Point(xLabelSize+300, 32+offset), size=wx.Size(149, 19),
+              pos=wx.Point(xLabelSize+300, yLineSpacing+offset),
+              size=wx.Size(149, yLineSize),
               style=wx.TE_RIGHT|wx.TE_PROCESS_ENTER,
               value=str(e.amount))
 
@@ -177,7 +183,8 @@ class LineSelect (Line) :
         Line.__init__(self, par, e, offset)
         self.selectCheckBox = wx.CheckBox(id=wx.NewId(),
               label=u'', name=u'selectCheckBox', parent=par,
-              pos=wx.Point(xLabelSize+464, 32+offset), size=wx.Size(19, 19), style=0)
+              pos=wx.Point(xLabelSize+464, yLineSpacing+offset),
+              size=wx.Size(yLineSize, yLineSize), style=0)
         self.selectCheckBox.SetValue(False)
 
     def destroy(self) :
@@ -193,32 +200,34 @@ class LastLine (object) :
         self.parent = prnt
         self.balanceDateButton = wx.Button(id=wxID_FRAMEBALANCEDATEBUTTON,
               label=u'Date', name=u'balanceDateButton',
-              parent=prnt, pos=wx.Point(xLabelSize-150, 59+offset),
+              parent=prnt, pos=wx.Point(xLabelSize-150, 32+offset),
               size=wx.Size(99, 25), style=0)
 
         self.balanceDateTextCtrl = wx.TextCtrl(id=wxID_FRAMEBALANCEDATETEXTCTRL,
               name=u'balanceDateTextCtrl', parent=prnt,
-              pos=wx.Point(xLabelSize-50, 62+offset), size=wx.Size(99, 19),
+              pos=wx.Point(xLabelSize-50, 32+offset),
+              size=wx.Size(99, yLineSize),
               style=wx.TE_PROCESS_ENTER, value="")
 
         self.totalBanqueStaticText = wx.StaticText(id=wxID_FRAMETOTALBANQUESTATICTEXT,
               label=u'Total banque', name=u'totalBanqueStaticText',
-              parent=prnt, pos=wx.Point(xLabelSize+100, 82+offset),
-              size=wx.Size(129, 19), style=0)
+              parent=prnt, pos=wx.Point(xLabelSize+100, 62+offset),
+              size=wx.Size(129, yLineSize), style=0)
 
         self.totalStaticText = wx.StaticText(id=wxID_FRAMETOTALSTATICTEXT,
               label=u'Total', name=u'totalStaticText',
-              parent=prnt, pos=wx.Point(xLabelSize+100, 62+offset),
+              parent=prnt, pos=wx.Point(xLabelSize+100, 32+offset),
               size=wx.Size(129, 20), style=0)
 
         self.totalTextCtrl = wx.TextCtrl(id=wxID_FRAMETOTALTEXTCTRL,
               name=u'totalTextCtrl', parent=prnt,
-              pos=wx.Point(xLabelSize+300, 62+offset), size=wx.Size(149, 19), style=wx.TE_RIGHT,
+              pos=wx.Point(xLabelSize+300, 32+offset),
+              size=wx.Size(149, yLineSize), style=wx.TE_RIGHT,
               value=str(total))
 
         self.totalBankTextCtrl = wx.TextCtrl(id=wxID_FRAMETOTALBANKTEXTCTRL,
               name=u'totalBankTextCtrl', parent=prnt,
-              pos=wx.Point(xLabelSize+300, 82+offset), size=wx.Size(149, 19), style=wx.TE_RIGHT,
+              pos=wx.Point(xLabelSize+300, 62+offset), size=wx.Size(149, yLineSize), style=wx.TE_RIGHT,
               value=str(totalBank))
 
         self.balanceDateTextCtrl.Bind(wx.EVT_TEXT_ENTER,
