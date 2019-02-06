@@ -27,12 +27,17 @@ categories = {u"énergie" : [u"electricité edf", u"gaz engie",],
                                u"abonnement adsl orange"],
               u"revenus" : [u"caf de haute-garonne", u"pôle emploi",
                             u"salaire cnrs florent", u"salaire aurélie",],
-              u"santé" : [u"cotisation mgen",],
+              u"santé" : [u"cotisation mgen", u"médecin",
+                          u"dentiste", u"pharmacie", u"remboursement mgen",
+                          u"remboursement cpam", u"orthophoniste",
+                          u"ophtalmologiste", u"docteur"],
               u"école" : [u"la prairie"],
-              u"automobile" : [u"automobile",],
-              u"maison" : [u"echéance prêt", u"travaux maison"],
+              u"mobilité" : [u"automobile", u"bicyclette", u"tisséo"],
+              u"assurances" : [u"assurance"],
+              u"maison" : [u"echéance prêt", u"travaux maison",
+                           u"entretien maison"],
               u"impôts" : [u"taxe foncière", u"taxe d'habitation",
-                           u"impôt sur le revenu",],
+                           u"impôt sur le revenu", u"csg", u"impôt"],
               u"dons" : [u"handicap international", u"don "],
               u"sport musique" : [u"taekwondo", u"ecole de musique ramonville",
                                   u"musique conservatoire"]}
@@ -63,3 +68,4 @@ with codecs.open ("bilan/synthese", "w", encoding='utf-8') as f:
         f.write (u"{0}\t: {1}\n".format (k, total [k]))
         for l, amount in accounts [k]:
             f.write (u"  {0}\t: {1}\n".format (l, amount))
+        f.write ("\n")
