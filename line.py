@@ -101,13 +101,13 @@ class Line (object) :
         self.entry.bank = self.bankCheckBox.GetValue()
 
     def OnBankCheckBoxHelp(self, event):
-        print "OnBankCheckBoxHelp"
+        print ("OnBankCheckBoxHelp")
 
     def OnDateTextCtrlTextMaxlen(self, event):
-        print "OnDateTextCtrlTextMaxlen"
+        print ("OnDateTextCtrlTextMaxlen")
 
     def OnDateTextCtrlTextUrl(self, event):
-        print "OnDateTextCtrlTextUrl"
+        print ("OnDateTextCtrlTextUrl")
 
     def OnDateTextCtrlTextEnter(self, event):
         newDate = self.dateTextCtrl.GetValue()
@@ -120,34 +120,34 @@ class Line (object) :
         pass
 
     def OnModeTextCtrlTextMaxlen(self, event):
-        print "OnModeTextCtrlTextMaxlen"
+        print ("OnModeTextCtrlTextMaxlen")
 
     def OnModeTextCtrlTextUrl(self, event):
-        print "OnModeTextCtrlTextUrl"
+        print ("OnModeTextCtrlTextUrl")
 
     def OnModeTextCtrlTextEnter(self, event):
-        print "OnModeTextCtrlTextEnter"
+        print ("OnModeTextCtrlTextEnter")
 
     def OnModeTextCtrlText(self, event):
         self.entry.mode = self.modeTextCtrl.GetValue()
 
     def OnLabelTextCtrlTextUrl(self, event):
-        print "OnLabelTextCtrlTextUrl"
+        print ("OnLabelTextCtrlTextUrl")
 
     def OnLabelTextCtrlTextMaxlen(self, event):
-        print "OnLabelTextCtrlTextMaxlen"
+        print ("OnLabelTextCtrlTextMaxlen")
 
     def OnLabelTextCtrlTextEnter(self, event):
-        print "OnLabelTextCtrlTextEnter"
+        print ("OnLabelTextCtrlTextEnter")
 
     def OnLabelTextCtrlText(self, event):
         self.entry.label = self.labelTextCtrl.GetValue()
 
     def OnAmountTextCtrlTextMaxlen(self, event):
-        print "OnAmountTextCtrlTextMaxlen"
+        print ("OnAmountTextCtrlTextMaxlen")
 
     def OnAmountTextCtrlTextUrl(self, event):
-        print "OnAmountTextCtrlTextUrl"
+        print ("OnAmountTextCtrlTextUrl")
 
     def OnAmountTextCtrlTextEnter(self, event):
         try:

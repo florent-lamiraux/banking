@@ -37,17 +37,18 @@ class Frame(wx.Frame):
     def _init_coll_menuFile_Items(self, parent):
         # generated method, don't edit
 
-        parent.Append(help=u'Ouvrir un fichier de comptes',
-              id=wxID_FRAMEMENUFILEOPEN, kind=wx.ITEM_NORMAL, text=u'Ouvrir')
-        parent.Append(help=u'Enregistrer les ecritures dans un fichier',
+        parent.Append(helpString=u'Ouvrir un fichier de comptes',
+              id=wxID_FRAMEMENUFILEOPEN, kind=wx.ITEM_NORMAL, item=u'Ouvrir')
+        parent.Append(helpString=u'Enregistrer les ecritures dans un fichier',
               id=wxID_FRAMEMENUFILESAVE, kind=wx.ITEM_NORMAL,
-              text=u'Enregistrer')
-        parent.Append(help='', id=wxID_FRAMEMENUFILESAVEAS, kind=wx.ITEM_NORMAL,
-              text=u'Enregistrer sous')
-        parent.Append(help='', id=wxID_FRAMEMENUFILECLOSE, kind=wx.ITEM_NORMAL,
-              text=u'Fermer')
-        parent.Append(help=u"Quitter l'application", id=wxID_FRAMEMENUFILEQUIT,
-              kind=wx.ITEM_NORMAL, text=u'Quitter')
+              item=u'Enregistrer')
+        parent.Append(helpString='', id=wxID_FRAMEMENUFILESAVEAS,
+                      kind=wx.ITEM_NORMAL, item=u'Enregistrer sous')
+        parent.Append(helpString='', id=wxID_FRAMEMENUFILECLOSE,
+                      kind=wx.ITEM_NORMAL, item=u'Fermer')
+        parent.Append(helpString=u"Quitter l'application",
+                      id=wxID_FRAMEMENUFILEQUIT,
+                      kind=wx.ITEM_NORMAL, item=u'Quitter')
         self.Bind(wx.EVT_MENU, self.OnFileOpenMenu, id=wxID_FRAMEMENUFILEOPEN)
         self.Bind(wx.EVT_MENU, self.OnFileSaveMenu, id=wxID_FRAMEMENUFILESAVE)
         self.Bind(wx.EVT_MENU, self.OnFileQuitMenu, id=wxID_FRAMEMENUFILEQUIT)
@@ -84,9 +85,10 @@ class Frame(wx.Frame):
         self.upperPanel = wx.Panel(id=wxID_FRAMEUPPERPANEL,
                                    name=u'upper panel', parent=self,
                                    pos=wx.Point(0,0), size=wx.Size(xWindowSize,25))
-        self.scrolledWindow = wx.ScrolledWindow(id=wxID_FRAMESCROLLEDWINDOW,
-              name=u'scrolledWindow', parent=self, pos=wx.Point(0, 25),
-              size=wx.Size(xTotalSize, yWindowSize), style=wx.HSCROLL | wx.VSCROLL)
+        self.scrolledWindow = wx.ScrolledWindow\
+            (parent=self, winid=wxID_FRAMESCROLLEDWINDOW,
+             pos=wx.Point(0, 25), size=wx.Size(xTotalSize, yWindowSize),
+             style=wx.HSCROLL | wx.VSCROLL, name=u'scrolledWindow')
         self.scrolledWindow.SetVirtualSize(size=wx.Size(xWindowSize, 300))
         self.scrolledWindow.SetScrollRate(10,10)
 
@@ -178,7 +180,8 @@ class Frame(wx.Frame):
         event.Skip()
 
     def OnFileOpenMenu(self, event):
-        dlg = wx.FileDialog(self, 'Choisissez un fichier', '.', '', '*.cpt', wx.OPEN)
+        dlg = wx.FileDialog(parent=self, message='Choisissez un fichier',
+                            defaultDir='.', defaultFile='', wildcard='*.cpt')
         try:
             if dlg.ShowModal() == wx.ID_OK:
                 filename = dlg.GetPath()

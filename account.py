@@ -47,10 +47,11 @@ class Account (object) :
         """
         Compute the balance as reported on the bank statement
         """
-        return reduce (lambda x,y: x+y,
-                       map(lambda e : e.amount,
-                           filter(lambda e:e.bank, self.entries)),
-                       0)
+        total = 0
+        for e in self.entries:
+            if e.bank:
+                total += e.amount
+        return total
 
     def read(self, filename) :
         """
@@ -108,11 +109,11 @@ class Account (object) :
                 result.append(e)
         return result
 
-    def sort (self, comp = lambda x,y: cmp(x.date,y.date)) :
+    def sort (self) :
         """
         Sort entries by increasing dates
         """
-        self.entries.sort(comp)
+        self.entries.sort(key = lambda e:e.date)
 
     def __str__(self) :
         output = u""
