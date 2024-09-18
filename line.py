@@ -49,8 +49,6 @@ class Line (object) :
               self.OnModeTextCtrlTextMaxlen, id=newId)
         self.modeTextCtrl.Bind(wx.EVT_TEXT_URL, self.OnModeTextCtrlTextUrl,
               id=newId)
-        self.modeTextCtrl.Bind(wx.EVT_TEXT_ENTER,
-              self.OnModeTextCtrlTextEnter, id=newId)
         self.modeTextCtrl.Bind(wx.EVT_TEXT, self.OnModeTextCtrlText,
               id=newId)
 
@@ -64,8 +62,6 @@ class Line (object) :
               self.OnLabelTextCtrlTextUrl, id=newId)
         self.labelTextCtrl.Bind(wx.EVT_TEXT_MAXLEN,
               self.OnLabelTextCtrlTextMaxlen, id=newId)
-        self.labelTextCtrl.Bind(wx.EVT_TEXT_ENTER,
-              self.OnLabelTextCtrlTextEnter, id=newId)
         self.labelTextCtrl.Bind(wx.EVT_TEXT, self.OnLabelTextCtrlText,
               id=newId)
 

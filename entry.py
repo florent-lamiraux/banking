@@ -50,7 +50,7 @@ def stringToDate(dateStr) :
     if dateStr == "":
         return dt.date.max
     d = re.split("/", dateStr)
-    if len(d) is not 3:
+    if len(d) != 3:
         raise RuntimeError("La date s'écrit jj/mm/aaaa.")
 
     j = int(d[0])

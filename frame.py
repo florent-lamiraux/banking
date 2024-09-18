@@ -86,7 +86,7 @@ class Frame(wx.Frame):
                                    name=u'upper panel', parent=self,
                                    pos=wx.Point(0,0), size=wx.Size(xWindowSize,25))
         self.scrolledWindow = wx.ScrolledWindow\
-            (parent=self, winid=wxID_FRAMESCROLLEDWINDOW,
+            (parent=self, id=wxID_FRAMESCROLLEDWINDOW,
              pos=wx.Point(0, 25), size=wx.Size(xTotalSize, yWindowSize),
              style=wx.HSCROLL | wx.VSCROLL, name=u'scrolledWindow')
         self.scrolledWindow.SetVirtualSize(size=wx.Size(xWindowSize, 300))
